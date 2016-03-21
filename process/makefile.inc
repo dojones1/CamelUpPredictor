@@ -1,0 +1,1 @@
+# include $(CAMELUPP_DIR)/makefile.inc

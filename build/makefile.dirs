@@ -1,0 +1,28 @@
+ROOT = .
+###########################
+# Build Object paths
+BUILD_DIR = $(ROOT)/build
+
+###########################
+# COMMON_DIRS
+define COMMON_DIRS
+$(1)_BUILD_DIR = $(BUILD_DIR)/$(1)
+$(1)_OBJ_DIR = $$($(1)_BUILD_DIR)/obj
+$(1)_LIB_DIR = $$($(1)_BUILD_DIR)/lib
+$(1)_BIN_DIR = $$($(1)_BUILD_DIR)/bin
+endef
+
+$(eval $(call COMMON_DIRS,OSX))
+$(eval $(call COMMON_DIRS,OSX_UT))
+
+###########################
+# Setup paths
+TEST_RESULTS_DIR = $(ROOT)/build/test_results
+VALGRIND_RESULTS_DIR = $(ROOT)/build/valgrind_results
+COMMON_LIB_DIR = $(ROOT)/common/lib
+BOARD_DIR = $(COMMON_LIB_DIR)/board
+
+PROCESS_DIR = $(ROOT)/process
+CAMELUPP_DIR = $(PROCESS_DIR)/camelupp
+
+THIRDPARTY_DIR = $(ROOT)/thirdparty
