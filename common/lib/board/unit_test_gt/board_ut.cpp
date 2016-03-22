@@ -47,19 +47,9 @@
  void addImpediment(impedimentType_e type, playerColour_e owner);
  void removeImpediment();
  */
-TEST(Impediment_init, Positive) {
-    Impediment imp;
+TEST(Board_init, Positive) {
+    Board brd;
     
-    EXPECT_EQ(imp.getImpedimentType(),	invalidType);
-    EXPECT_EQ(imp.getImpedimentOwner(),	UNKNOWN_PLAYER);
-    
-    imp.addImpediment(oasis,1);
-    EXPECT_EQ(imp.getImpedimentType(),	oasis);
-    EXPECT_EQ(imp.getImpedimentOwner(),	1);
-    
-    imp.removeImpediment();
-    EXPECT_EQ(imp.getImpedimentType(),	invalidType);
-    EXPECT_EQ(imp.getImpedimentOwner(),	UNKNOWN_PLAYER);
     
 }
 

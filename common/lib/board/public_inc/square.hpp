@@ -23,7 +23,7 @@ class Square
 
 public:
     Square();                   // default constructor
-    Square(Square&);             // copy constructor
+    //Square(Square&);             // copy constructor
     Square(uint8_t location);   // populate location with a default value.
     
     bool                isImpedimentPresent();	// Confirms if an impediment is present on this square.

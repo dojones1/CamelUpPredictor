@@ -21,6 +21,7 @@ Square::Square(uint8_t location):
 {
 }
 
+
 bool Square::isImpedimentPresent() {
     return m_impedimentPresent;
 }

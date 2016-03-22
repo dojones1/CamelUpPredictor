@@ -34,7 +34,7 @@ public:
         m_impedimentOwner(UNKNOWN_PLAYER)
     {}
     
-    Impediment(Impediment&);
+    //Impediment(Impediment&);
     impedimentType_e getImpedimentType();
     player_t   getImpedimentOwner();
     void addImpediment(impedimentType_e type, player_t owner);
