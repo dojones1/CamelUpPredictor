@@ -9,6 +9,9 @@
 #ifndef colour_h
 #define colour_h
 
-enum playerColour_e {unknownPlayer, playerOrange, playerYellow, playerGreen, playerBlue, playerWhite};
+enum camelColour_e {unknownCamel, camelOrange, camelYellow, camelGreen, camelBlue, camelWhite};
+
+#define UNKNOWN_PLAYER 0xFF
+typedef uint8_t player_t;
 
 #endif /* colour_h */

@@ -43,15 +43,15 @@ TEST(Impediment_init, Positive) {
 	Impediment imp;
     
     EXPECT_EQ(imp.getImpedimentType(),	invalidType);
-    EXPECT_EQ(imp.getImpedimentOwner(),	unknownPlayer);  
+    EXPECT_EQ(imp.getImpedimentOwner(),	UNKNOWN_PLAYER);  
     
-    imp.addImpediment(oasis,playerBlue);
+    imp.addImpediment(oasis,1);
     EXPECT_EQ(imp.getImpedimentType(),	oasis);
-    EXPECT_EQ(imp.getImpedimentOwner(),	playerBlue);  
+    EXPECT_EQ(imp.getImpedimentOwner(),	1);  
     
     imp.removeImpediment();
     EXPECT_EQ(imp.getImpedimentType(),	invalidType);
-    EXPECT_EQ(imp.getImpedimentOwner(),	unknownPlayer);  
+    EXPECT_EQ(imp.getImpedimentOwner(),	UNKNOWN_PLAYER);  
     
 }
 

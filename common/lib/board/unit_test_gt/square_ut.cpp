@@ -6,6 +6,7 @@
 #include <limits.h>
 #include "square.hpp"
 #include "gtest/gtest.h"
+using namespace std;
 
 // Step 2. Use the TEST macro to define your tests.
 //
@@ -42,8 +43,8 @@
     int8_t				getLocationToAdd();
     
     // Methods for initial setup
-    void                addPlayerToTop(playerColour_e);
-    void                addPlayerToBottom(playerColour_e);
+    void                addCamelToTop(playerColour_e);
+    void                addCamelToBottom(playerColour_e);
 */
 
 TEST(Square_init1, Positive) {
@@ -65,14 +66,14 @@ TEST(Square_addRemoveImpediment, Positive) {
 	EXPECT_EQ(sq.getLocation(),	1);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
-    sq.addImpediment(oasis, playerBlue);
+    sq.addImpediment(oasis, 4);
     EXPECT_EQ(sq.getImpedimentType(),	oasis);
-    EXPECT_EQ(sq.getImpedimentOwner(),  playerBlue);
+    EXPECT_EQ(sq.getImpedimentOwner(),  4);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
 
 	sq.removeImpediment();
     EXPECT_EQ(sq.getImpedimentType(),	invalidType);
-    EXPECT_EQ(sq.getImpedimentOwner(),  unknownPlayer);
+    EXPECT_EQ(sq.getImpedimentOwner(),  UNKNOWN_PLAYER);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
 }
 
@@ -82,9 +83,9 @@ TEST(Square_LocationToAdd_Oasis, Positive)
 	EXPECT_EQ(sq.getLocation(),	0);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
-    sq.addImpediment(oasis, playerOrange);
+    sq.addImpediment(oasis, 3);
     EXPECT_EQ(sq.getImpedimentType(),	oasis);
-    EXPECT_EQ(sq.getImpedimentOwner(),  playerOrange);
+    EXPECT_EQ(sq.getImpedimentOwner(),  3);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 1);
 }
@@ -95,9 +96,10 @@ TEST(Square_LocationToAdd_Swamp, Positive)
 	EXPECT_EQ(sq.getLocation(),	1);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
-    sq.addImpediment(swamp, playerOrange);
+    sq.addImpediment(swamp, 2);
+    //sq.print();
     EXPECT_EQ(sq.getImpedimentType(),	swamp);
-    EXPECT_EQ(sq.getImpedimentOwner(),  playerOrange);
+    EXPECT_EQ(sq.getImpedimentOwner(),  2);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 0);
 }
@@ -108,12 +110,83 @@ TEST(Square_LocationToAdd_Swamp_0, Positive)
 	EXPECT_EQ(sq.getLocation(),	0);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
-    sq.addImpediment(swamp, playerOrange);
+    sq.addImpediment(swamp, 4);
     EXPECT_EQ(sq.getImpedimentType(),	swamp);
-    EXPECT_EQ(sq.getImpedimentOwner(),  playerOrange);
+    EXPECT_EQ(sq.getImpedimentOwner(),  4);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 0);
 }
+
+TEST(Square_vec_insert_at_top_empty_vec, Positive)
+{
+	Square sq(0);
+	vector<camelColour_e> vec_to_insert;
+	
+	EXPECT_EQ(sq.getNumCamels(), 0);
+	vec_to_insert.push_back(camelBlue);
+	vec_to_insert.push_back(camelGreen);
+	
+	sq.insertCamelsAtTop(vec_to_insert);
+	EXPECT_EQ(sq.getNumCamels(), 2);
+}
+
+TEST(Square_vec_insert_at_bottom_empty_list, Positive)
+{
+	Square sq(0);
+	vector<camelColour_e> vec_to_insert;
+	
+	EXPECT_EQ(sq.getNumCamels(), 0);
+	
+	// Build the list to insert
+	vec_to_insert.push_back(camelBlue);
+	vec_to_insert.push_back(camelGreen);
+	
+	sq.insertCamelsAtBottom(vec_to_insert);
+	EXPECT_EQ(sq.getNumCamels(), 2);
+	EXPECT_EQ(sq.getCamelInFront(), camelGreen);
+	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
+}
+
+TEST(Square_vec_insert_at_Top_existing_vec, Positive)
+{
+	Square sq(0);
+	sq.addCamelToTop(camelBlue);
+	EXPECT_EQ(sq.getNumCamels(), 1);
+	EXPECT_EQ(sq.getCamelInFront(), camelBlue);
+	
+	sq.addCamelToTop(camelOrange);
+	EXPECT_EQ(sq.getNumCamels(), 2);
+	EXPECT_EQ(sq.getCamelInFront(), camelOrange);
+	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
+}
+
+TEST(Square_vec_value_at, Positive)
+{
+	Square sq(0);
+	sq.addCamelToTop(camelOrange);
+	sq.addCamelToTop(camelYellow);
+	sq.addCamelToTop(camelGreen);
+	
+	EXPECT_EQ(sq.getCamelInFront(), camelGreen);
+	EXPECT_EQ(sq.getCamelInSecond(), camelYellow);
+}
+
+TEST(Square_getCamelIn_1_value, Negative)
+{
+	Square sq(0);
+	sq.addCamelToTop(camelOrange);
+	
+	EXPECT_EQ(sq.getCamelInFront(), camelOrange);
+	EXPECT_EQ(sq.getCamelInSecond(), unknownCamel);
+}
+
+TEST(Square_getCamelIn_0_value, Negative)
+{
+	Square sq(0);
+	EXPECT_EQ(sq.getCamelInFront(), unknownCamel);
+	EXPECT_EQ(sq.getCamelInSecond(), unknownCamel);
+}
+
 // Step 3. Call RUN_ALL_TESTS() in main().
 //
 // We do this by linking in src/gtest_main.cc file, which consists of

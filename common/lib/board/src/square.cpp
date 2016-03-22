@@ -7,6 +7,7 @@
 //
 
 #include "square.hpp"
+using namespace std;
 
 Square::Square():
     m_location(0),
@@ -39,11 +40,11 @@ uint8_t   Square::getLocation()
     return m_location;
 }
 
-playerColour_e   Square::getImpedimentOwner() {
+player_t   Square::getImpedimentOwner() {
     return m_impediment.getImpedimentOwner();
 }
 
-void Square::addImpediment(impedimentType_e type, playerColour_e owner)
+void Square::addImpediment(impedimentType_e type, player_t owner)
 {
 	m_impediment.addImpediment(type, owner);
 	m_impedimentPresent = true;
@@ -87,12 +88,58 @@ int8_t Square::getLocationToAdd()
 	}
 }
 
-void Square::addPlayerToTop(playerColour_e colour)
+uint8_t Square::getNumCamels()
 {
-    m_playerList.push_front(colour);
+	return m_camelVec.size();
 }
 
-void Square::addPlayerToBottom(playerColour_e colour)
+void Square::addCamelToTop(camelColour_e colour)
 {
-    m_playerList.push_back(colour);
+    m_camelVec.push_back(colour);
+}
+
+void Square::addCamelToBottom(camelColour_e colour)
+{
+    m_camelVec.insert(m_camelVec.begin(),colour);
+}
+
+void Square::insertCamelsAtTop(std::vector<camelColour_e> vec_to_insert)
+{
+	m_camelVec.insert(m_camelVec.end(), vec_to_insert.begin(), vec_to_insert.end());
+}
+
+void Square::insertCamelsAtBottom(std::vector<camelColour_e> vec_to_insert) 
+{
+	m_camelVec.insert(m_camelVec.begin(), vec_to_insert.begin(), vec_to_insert.end());
+}
+
+camelColour_e Square::getCamelInFront()
+{
+	if (m_camelVec.size() > 0)
+	{
+		return m_camelVec.at(m_camelVec.size()-1);
+	} 
+	else return unknownCamel;
+}
+
+camelColour_e Square::getCamelInSecond()
+{
+	if (m_camelVec.size() > 1)
+	{
+		return m_camelVec.at(m_camelVec.size()-2);
+	} 
+	else return unknownCamel;
+}
+
+void Square::print()
+{
+	cout << "m_impedimentPresent: " << m_impedimentPresent << endl;
+	if (m_impedimentPresent)
+		m_impediment.print("Square");
+	cout << "m_camelVec: " << m_camelVec.size() << " camels" << endl;
+	if (m_camelVec.size())
+	{
+		copy(m_camelVec.cbegin(), m_camelVec.cend(), ostream_iterator<camelColour_e>(cout," "));
+		cout << endl;
+	}
 }

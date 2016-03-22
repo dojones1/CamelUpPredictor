@@ -7,17 +7,18 @@
 //
 
 #include "impediment.hpp"
+
 impedimentType_e Impediment::getImpedimentType()
 {
     return m_impedimentType;
 }
 
-playerColour_e Impediment::getImpedimentOwner()
+player_t Impediment::getImpedimentOwner()
 {
     return m_impedimentOwner;
 }
 
-void Impediment::addImpediment(impedimentType_e type, playerColour_e owner)
+void Impediment::addImpediment(impedimentType_e type, player_t owner)
 {
     m_impedimentType  = type;
     m_impedimentOwner = owner;
@@ -26,5 +27,11 @@ void Impediment::addImpediment(impedimentType_e type, playerColour_e owner)
 void Impediment::removeImpediment()
 {
     m_impedimentType  = invalidType;
-    m_impedimentOwner = unknownPlayer;
+    m_impedimentOwner = UNKNOWN_PLAYER;
+}
+
+void Impediment::print(string parent)
+{
+	cout << parent << ".m_impedimentType: " << m_impedimentType << endl;
+	cout << parent << ".m_impedimentOwner: " << m_impedimentOwner <<endl;
 }
