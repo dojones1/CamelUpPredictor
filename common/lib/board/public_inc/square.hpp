@@ -23,13 +23,14 @@ class Square
 
 public:
     Square();                   // default constructor
+    Square(Square&);             // copy constructor
     Square(uint8_t location);   // populate location with a default value.
     
     bool                isImpedimentPresent();	// Confirms if an impediment is present on this square.
     void				setLocation(uint8_t);   // Sets the location for this square
     uint8_t				getLocation();			// Returns the location.
     impedimentType_e    getImpedimentType();	//
-    player_t       getImpedimentOwner();
+    player_t            getImpedimentOwner();
     void				addImpediment(impedimentType_e type, player_t owner);
     void				removeImpediment();
     int8_t				getLocationToAdd();

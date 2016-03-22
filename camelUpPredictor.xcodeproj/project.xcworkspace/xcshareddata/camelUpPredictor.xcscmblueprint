@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AAB809178502648EBD39959A95DFF0B1B17D00B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "76A15575C5B740800EF8E92EA66B97A276AEF659" : 0,
+    "AAB809178502648EBD39959A95DFF0B1B17D00B9" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0C8AC2A1-688E-49BA-97D6-89FB4DCA0550",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "76A15575C5B740800EF8E92EA66B97A276AEF659" : "CamelUpPredictor\/thirdparty\/googletest\/",
+    "AAB809178502648EBD39959A95DFF0B1B17D00B9" : "CamelUpPredictor\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "camelUpPredictor",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "camelUpPredictor.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/google\/googletest.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "76A15575C5B740800EF8E92EA66B97A276AEF659"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dojones1\/CamelUpPredictor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AAB809178502648EBD39959A95DFF0B1B17D00B9"
+    }
+  ]
+}
