@@ -17,11 +17,10 @@ alltests: directories $(ALL_TESTS)
 
 test: $(ALL_TESTS_RUN)
 
-all: directories software test
-	@echo "Valgrind: $(VALGRIND)"
-	@echo "CCACHE: $(CCACHE)"
+all: directories software test $(RUNCOV)
 	
 install: all
 	@echo you must be root to install
 
 clean: $(ALL_CLEANS) directories_clean
+

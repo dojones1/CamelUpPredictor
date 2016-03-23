@@ -14,7 +14,10 @@ GTEST_DIR = $(THIRDPARTY_DIR)/googletest/googletest
 GTEST_CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 # Flags passed to the C++ compiler.
-GTEST_CXXFLAGS += -g -O0 -Wall -Wextra -pthread
+GTEST_CXXFLAGS += -g -O0 -Wall -Wextra -Werror -pthread -std=c++0x -std=c++11 -stdlib=libc++
+ifeq ($(COV),Y)
+GTEST_CXXFLAGS += -fprofile-arcs -ftest-coverage
+endif
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -38,13 +41,13 @@ define COMMON_GTEST_LIB
 $$($(1)_UT_OBJ_DIR)/gtest-all.o : $(GTEST_SRCS_)
 	@ echo "\033[0;34m [ $(1)_UT_OBJ_C: $$@] \033[m"
 	$(_Q) $(MKDIR) `dirname $$@`
-	$(_Q) $(CXX) $(GTEST_CPPFLAGS) -I$(GTEST_DIR) $(GTEST_CXXFLAGS) -c \
+	$(_Q) $$($(1)_CCPLUSPLUS)  $(GTEST_CXXFLAGS) $(GTEST_CPPFLAGS) -I$(GTEST_DIR) -c \
             $(GTEST_DIR)/src/gtest-all.cc  -o $$@ 
 
 $$($(1)_UT_OBJ_DIR)/gtest_main.o : $(GTEST_SRCS_)
 	@ echo "\033[0;34m [ $(1)_UT_OBJ_C++: $$@] \033[m"
 	$(_Q) $(MKDIR) `dirname $$@`
-	$(_Q) $(CXX) $(GTEST_CPPFLAGS) -I$(GTEST_DIR) $(GTEST_CXXFLAGS) -c \
+	$(_Q) $$($(1)_CCPLUSPLUS) $(GTEST_CXXFLAGS) $(GTEST_CPPFLAGS) -I$(GTEST_DIR) -c \
 	        $(GTEST_DIR)/src/gtest_main.cc  -o $$@ 
 
 $$($(1)_UT_OBJ_DIR)/gtest.a : $$($(1)_UT_OBJ_DIR)/gtest-all.o

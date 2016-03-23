@@ -3,10 +3,10 @@ include build/makefile.dirs
 ###########################
 # Build tools
 
-OSX_CC = g++
-OSX_CCPLUSPLUS = g++
+OSX_CC = clang
+OSX_CCPLUSPLUS = clang++
 OSX_FLAGS  = -Wall -Werror -Wextra
-OSX_FLAGS += -std=c++0x
+OSX_FLAGS += -std=c++0x -std=c++11 -stdlib=libc++
 
 X86_CC = $(CC)
 X86_CCPLUSPLUS = $(CXX)
@@ -43,10 +43,21 @@ setccacheflags:
 ifeq ($(CCACHE),Y)
 CCACHE_BIN = /usr/local/bin/ccache
 CCACHE_FLAGS = -Qunused-arguments -fcolor-diagnostics
-
 endif
 
-setflags:setvalgrindflags setccacheflags
+setcovflags:
+    @ echo "COV: $(COV)"
+ifeq ($(COV),Y)
+COV_COMPILER_FLAGS = -fprofile-arcs -ftest-coverage
+COV_LINKER_FLAGS = -coverage
+RUNCOV = gen_coverage_data
+endif
+
+gen_coverage_data:
+	lcov --directory . --base-directory . --gcov-tool build/llvm-gcov.sh --capture -o $(BUILD_DIR)/cov.info
+	genhtml $(BUILD_DIR)/cov.info -o $(BUILD_DIR)/cov_output
+
+setflags:setvalgrindflags setccacheflags setcovflags
 
 ###########################
 # Aggregate lists
@@ -147,7 +158,6 @@ $(eval $(call COMMON_LIB,$(1),$(2),$(3),$(4),$(5),$(6),ARM))
 endef
 
 ###########################
-
 # COMMON_BIN
 # 1 - name of the make file target
 # 2 - name of the binary file
@@ -175,7 +185,7 @@ $$($(7)_OBJ_DIR)/%.o: $(ROOT)/%.cpp
 $$($(7)_BIN_DIR)/$(2): setflags $(patsubst $(ROOT)/%.c, $$($(7)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_OBJ_DIR)/%.o,$(5))
 	@ echo "\033[0;35m [ $(7)_BIN:     $$@ $<] \033[m"
 	$(_Q) $(MKDIR) $(dir $$($(7)_BIN_DIR)/$(2))
-	$(_Q) $(CCACHE_BIN) $$($(7)_CC) $$($(7)_FLAGS) $6 $(patsubst $(ROOT)/%.c, $$($(7)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_OBJ_DIR)/%.o,$(5)) -o $$($(7)_BIN_DIR)/$2
+	$(_Q) $(CCACHE_BIN) $$($(7)_CCPLUSPLUS) $$($(7)_FLAGS) $6 $(patsubst $(ROOT)/%.c, $$($(7)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_OBJ_DIR)/%.o,$(5)) -o $$($(7)_BIN_DIR)/$2
 	
 # target dependent on binary
 $(1): $$($(7)_BIN_DIR)/$(2)
@@ -205,7 +215,6 @@ $(eval $(call COMMON_BIN,$(1),$(2),$(3),$(4),$(5),$(6),ARM))
 endef
 
 ###########################
-
 # COMMON_UT
 # 1 - name of the make file target
 # 2 - name of the binary file
@@ -222,19 +231,19 @@ define COMMON_UT
 $$($(7)_UT_OBJ_DIR))/%.o:$(ROOT)/%.c
 	@ echo "\033[0;34m [ $(7)_UT_OBJ_C:     $$@ $<] \033[m"
 	$(_Q) $(MKDIR) `dirname $$@`
-	$(_Q) $(CCACHE_BIN) $$($(7)_CC) $$($(7)_FLAGS) $(VALGRIND_CC_FLAGS) -c $(4) $$< -o $$@
+	$(_Q) $(CCACHE_BIN) $$($(7)_CC) $$($(7)_FLAGS) $(VALGRIND_CC_FLAGS) $(COV_COMPILER_FLAGS) -c $(4) $$< -o $$@
  
 #.cpp subsubsitution rule i.e. turn cpp files into .o files
 $$($(7)_UT_OBJ_DIR)/%.o:$(ROOT)/%.cpp
 	@ echo "\033[0;34m [ $(7)_UT_OBJ_C++: $$@] \033[m"
 	$(_Q) $(MKDIR) `dirname $$@`
-	$(_Q) $(CCACHE_BIN) $$($(7)_CCPLUSPLUS) $$($(7)_FLAGS) $(VALGRIND_CC_FLAGS) -c $(6) $$< -o $$@ 
+	$(_Q) $(CCACHE_BIN) $$($(7)_CCPLUSPLUS) $$($(7)_FLAGS) $(VALGRIND_CC_FLAGS) $(COV_COMPILER_FLAGS) -c $(6) $$< -o $$@
  
 # bin rule dependent on all .o which are created from the .c and .cpp files passed in
 $$($(7)_UT_BIN_DIR)/$(2): setflags $(patsubst $(ROOT)/%.c, $$($(7)_UT_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_UT_OBJ_DIR)/%.o,$(5))
 	@ echo "\033[0;35m [ $(7)_UT_BIN:     $$@ $<] \033[m"
 	$(_Q) $(MKDIR) `dirname $$@`
-	$(_Q) $(CCACHE_BIN) $$($(7)_CC) $$($(7)_FLAGS) $(patsubst $(ROOT)/%.c, $$($(7)_UT_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_UT_OBJ_DIR)/%.o,$(5)) $8 -o $$($(7)_UT_BIN_DIR)/$2
+	$(_Q) $(CCACHE_BIN) $$($(7)_CCPLUSPLUS) $$($(7)_FLAGS) $(COV_LINKER_FLAGS) $(patsubst $(ROOT)/%.c, $$($(7)_UT_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_UT_OBJ_DIR)/%.o,$(5)) $8 -o $$($(7)_UT_BIN_DIR)/$2
 	
 # target dependent on binary
 $(1): $$($(7)_UT_BIN_DIR)/$(2)
