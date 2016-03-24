@@ -16,7 +16,7 @@ X86_FLAGS  = -Wall -Werror -Wextra
 RMF = rm -f
 RMRF = rm -rf
 MKDIR = mkdir -p
-
+LCOV = /usr/local/bin/lcov
 
 ###########################
 # Aggregate lists
@@ -65,7 +65,7 @@ endif
 ALL_CLEANS += gen_coverage_data_clean
 
 gen_coverage_data: alltests
-	lcov --directory . --base-directory . --capture -o $(BUILD_DIR)/cov.info
+	$(LCOV) --directory $(BUILD_DIR) --base-directory . --capture -o $(BUILD_DIR)/cov.info
 	genhtml $(BUILD_DIR)/cov.info -o $(BUILD_DIR)/cov_output
 	gcovr build --xml-pretty > $(BUILD_DIR)/cov_output.xml
 
