@@ -18,6 +18,15 @@ RMRF = rm -rf
 MKDIR = mkdir -p
 
 
+###########################
+# Aggregate lists
+
+ALL_OBJS =
+ALL_LIBS =
+ALL_BINS =
+ALL_CLEANS =
+ALL_TESTS =
+ALL_TESTS_RUN =
 
 ###########################
 # Control flags
@@ -53,21 +62,21 @@ COV_LINKER_FLAGS = -coverage
 RUNCOV = gen_coverage_data
 endif
 
-gen_coverage_data:
-	lcov --directory . --base-directory . --gcov-tool build/llvm-gcov.sh --capture -o $(BUILD_DIR)/cov.info
+ALL_CLEANS += gen_coverage_data_clean
+
+gen_coverage_data: alltests
+	lcov --directory . --base-directory . --capture -o $(BUILD_DIR)/cov.info
 	genhtml $(BUILD_DIR)/cov.info -o $(BUILD_DIR)/cov_output
+	gcovr build --xml-pretty > $(BUILD_DIR)/cov_output.xml
+
+gen_coverage_data_clean:
+	$(_Q) $(RMRF) $(BUILD_DIR)/cov.info
+	$(_Q) $(RMRF) $(BUILD_DIR)/cov_output
+	$(_Q) $(RMRF) $(BUILD_DIR)/cov_output.xml
+
 
 setflags:setvalgrindflags setccacheflags setcovflags
 
-###########################
-# Aggregate lists
-
-ALL_OBJS = 
-ALL_LIBS = 
-ALL_BINS = 
-ALL_CLEANS = 
-ALL_TESTS = 
-ALL_TESTS_RUN =
 
 
 ###########################
