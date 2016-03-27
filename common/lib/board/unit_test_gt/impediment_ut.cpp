@@ -39,7 +39,7 @@
     void addImpediment(impedimentType_e type, playerColour_e owner);
     void removeImpediment();
 */
-TEST(Impediment_init, Positive) {
+TEST(Impediment, init) {
 	Impediment imp;
     
     EXPECT_EQ(imp.getImpedimentType(),	invalidType);

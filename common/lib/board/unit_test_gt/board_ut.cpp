@@ -41,7 +41,7 @@
 
 
 
-TEST(Board_init, Positive) {
+TEST(Board, init) {
     Board brd;
     
     for (auto idx = 0; idx < NUM_SQUARES_ON_BOARD; idx++)
@@ -51,7 +51,7 @@ TEST(Board_init, Positive) {
     brd.print();
 }
 
-TEST(Board_impediment, Positive) {
+TEST(Board, impediment) {
     Board brd;
     
     brd.addImpediment(1, oasis, 1);
@@ -66,7 +66,7 @@ TEST(Board_impediment, Positive) {
     //brd.print();
 }
 
-TEST(Board_hasCamelFinished_sq1, Negative) {
+TEST(Board, hasCamelFinished_sq1) {
     Board brd;
     
     brd.addCamel(1, camelOrange);
@@ -74,7 +74,7 @@ TEST(Board_hasCamelFinished_sq1, Negative) {
     EXPECT_EQ(brd.hasCamelFinished(), false);
 }
 
-TEST(Board_hasCamelFinished_sq15, Negative) {
+TEST(Board, hasCamelFinished_sq15) {
     Board brd;
     
     brd.addCamel(15, camelOrange);
@@ -82,7 +82,7 @@ TEST(Board_hasCamelFinished_sq15, Negative) {
     EXPECT_EQ(brd.hasCamelFinished(), false);
 }
 
-TEST(Board_hasCamelFinished_sq16, Positive) {
+TEST(Board, hasCamelFinished_sq16) {
     Board brd;
     
     brd.addCamel(16, camelOrange);
@@ -91,7 +91,7 @@ TEST(Board_hasCamelFinished_sq16, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelPlaces_0, Positive) {
+TEST(Board, camelPlaces_0) {
     Board brd;
     EXPECT_EQ(brd.whichCamelIsLeading(), unknownCamel);
     EXPECT_EQ(brd.whichCamelIsSecond(), unknownCamel);
@@ -99,7 +99,7 @@ TEST(Board_camelPlaces_0, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelPlaces_1, Positive) {
+TEST(Board, camelPlaces_1) {
     Board brd;
     
     brd.addCamel(0, camelOrange);
@@ -113,7 +113,7 @@ TEST(Board_camelPlaces_1, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelPlaces_2, Positive) {
+TEST(Board, camelPlaces_2) {
     Board brd;
     
     brd.addCamel(0, camelOrange);
@@ -127,7 +127,7 @@ TEST(Board_camelPlaces_2, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelPlaces_3, Positive) {
+TEST(Board, camelPlaces_3) {
     Board brd;
     
     brd.addCamel(0, camelOrange);
@@ -141,7 +141,7 @@ TEST(Board_camelPlaces_3, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelPlaces_4, Positive) {
+TEST(Board, camelPlaces_4) {
     Board brd;
     
     brd.addCamel(0, camelOrange);
@@ -155,7 +155,7 @@ TEST(Board_camelPlaces_4, Positive) {
 }
 
 
-TEST(Board_camelMovesNoImpediment_0, Positive) {
+TEST(Board, camelMovesNoImpediment_0) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
@@ -167,7 +167,7 @@ TEST(Board_camelMovesNoImpediment_0, Positive) {
     EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
 }
 
-TEST(Board_camelMovesNoImpediment_0a, Positive) {
+TEST(Board, camelMovesNoImpediment_0a) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
@@ -179,7 +179,7 @@ TEST(Board_camelMovesNoImpediment_0a, Positive) {
     EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
 }
 
-TEST(Board_camelMovesNoImpediment_0b, Positive) {
+TEST(Board, camelMovesNoImpediment_0b) {
     Board brd;
     brd.addCamel(0, camelOrange);
     brd.addCamel(0, camelYellow);
@@ -192,7 +192,7 @@ TEST(Board_camelMovesNoImpediment_0b, Positive) {
     EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
 }
 
-TEST(Board_camelMovesSwampImpediment_1, Positive) {
+TEST(Board, camelMovesSwampImpediment_1) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
@@ -205,7 +205,7 @@ TEST(Board_camelMovesSwampImpediment_1, Positive) {
     EXPECT_EQ(brd.whichCamelIsSecond(), camelBlue);
 }
 
-TEST(Board_camelMovesSwampImpediment_2, Positive) {
+TEST(Board, camelMovesSwampImpediment_2) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
@@ -219,7 +219,7 @@ TEST(Board_camelMovesSwampImpediment_2, Positive) {
     EXPECT_EQ(brd.whichCamelIsSecond(), camelBlue);
 }
 
-TEST(Board_camelMovesSwampImpediment_3, Positive) {
+TEST(Board, camelMovesSwampImpediment_3) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
@@ -236,7 +236,7 @@ TEST(Board_camelMovesSwampImpediment_3, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelMovesOasisImpediment_1, Positive) {
+TEST(Board, camelMovesOasisImpediment_1) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
@@ -250,7 +250,7 @@ TEST(Board_camelMovesOasisImpediment_1, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelMovesOasisImpediment_2, Positive) {
+TEST(Board, camelMovesOasisImpediment_2) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
@@ -264,7 +264,7 @@ TEST(Board_camelMovesOasisImpediment_2, Positive) {
 }
 
 //! Need to identify which camel is leading or not.
-TEST(Board_camelMovesOasisImpediment_3, Positive) {
+TEST(Board, camelMovesOasisImpediment_3) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);

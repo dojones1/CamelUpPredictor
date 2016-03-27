@@ -47,21 +47,21 @@ using namespace std;
     void                addCamelToBottom(playerColour_e);
 */
 
-TEST(Square_init1, Positive) {
+TEST(Square, init1) {
 	Square sq(1);
     
     EXPECT_EQ(sq.getLocation(),	1);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
 }
 
-TEST(Square_init2, Positive) {
+TEST(Square, init2) {
 	Square sq;
     sq.setLocation(2);
     EXPECT_EQ(sq.getLocation(),	2);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
 }
 
-TEST(Square_addRemoveImpediment, Positive) {
+TEST(Square, addRemoveImpediment) {
 	Square sq(1);
 	EXPECT_EQ(sq.getLocation(),	1);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
@@ -79,7 +79,7 @@ TEST(Square_addRemoveImpediment, Positive) {
     sq.print();
 }
 
-TEST(Square_LocationToAdd_noImpediment, Positive)
+TEST(Square, LocationToAdd_noImpediment)
 {
     Square sq(3);
     EXPECT_EQ(sq.getLocation(),	3);
@@ -89,7 +89,7 @@ TEST(Square_LocationToAdd_noImpediment, Positive)
 }
 
 
-TEST(Square_LocationToAdd_Oasis, Positive)
+TEST(Square, LocationToAdd_Oasis)
 {
 	Square sq(0);
 	EXPECT_EQ(sq.getLocation(),	0);
@@ -102,7 +102,7 @@ TEST(Square_LocationToAdd_Oasis, Positive)
     EXPECT_EQ(sq.getLocationToAdd(), 1);
 }
 
-TEST(Square_LocationToAdd_Swamp, Positive)
+TEST(Square, LocationToAdd_Swamp)
 {
 	Square sq(1);
 	EXPECT_EQ(sq.getLocation(),	1);
@@ -116,7 +116,7 @@ TEST(Square_LocationToAdd_Swamp, Positive)
     EXPECT_EQ(sq.getLocationToAdd(), 0);
 }
 
-TEST(Square_LocationToAdd_Swamp_0, Positive)
+TEST(Square, LocationToAdd_Swamp_0)
 {
 	Square sq(0);
 	EXPECT_EQ(sq.getLocation(),	0);
@@ -131,7 +131,7 @@ TEST(Square_LocationToAdd_Swamp_0, Positive)
     sq.print();
 }
 
-TEST(Square_vec_insert_at_top_empty_vec, Positive)
+TEST(Square, vec_insert_at_top_empty_vec)
 {
     Square sq(0);
 	
@@ -145,7 +145,7 @@ TEST(Square_vec_insert_at_top_empty_vec, Positive)
 	EXPECT_EQ(sq.getNumCamels(), 2);
 }
 
-TEST(Square_vec_insert_at_bottom_empty_list, Positive)
+TEST(Square, vec_insert_at_bottom_empty_list)
 {
 	Square sq(0);
 	vector<camelColour_e> vec_to_insert;
@@ -162,7 +162,7 @@ TEST(Square_vec_insert_at_bottom_empty_list, Positive)
 	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
 }
 
-TEST(Square_vec_add_at_Top_existing_vec, Positive)
+TEST(Square, vec_add_at_Top_existing_vec)
 {
 	Square sq(0);
 	sq.addCamelToTop(camelBlue);
@@ -175,7 +175,7 @@ TEST(Square_vec_add_at_Top_existing_vec, Positive)
 	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
 }
 
-TEST(Square_vec_ad_at_Bottom_existing_vec, Positive)
+TEST(Square, vec_ad_at_Bottom_existing_vec)
 {
     Square sq(0);
     sq.addCamelToTop(camelBlue);
@@ -187,7 +187,7 @@ TEST(Square_vec_ad_at_Bottom_existing_vec, Positive)
     EXPECT_EQ(sq.getCamelInFront(), camelBlue);
     EXPECT_EQ(sq.getCamelInSecond(), camelOrange);
 }
-TEST(Square_vec_value_at, Positive)
+TEST(Square, vec_value_at)
 {
 	Square sq(0);
 	sq.addCamelToTop(camelOrange);
@@ -200,7 +200,7 @@ TEST(Square_vec_value_at, Positive)
     sq.print();
 }
 
-TEST(Square_getCamelIn_1_value, Negative)
+TEST(Square, getCamelIn_1_value)
 {
 	Square sq(0);
 	sq.addCamelToTop(camelOrange);
@@ -210,7 +210,7 @@ TEST(Square_getCamelIn_1_value, Negative)
     EXPECT_EQ(sq.getCamelAtBottom(), camelOrange);
 }
 
-TEST(Square_getCamelIn_0_value, Negative)
+TEST(Square, getCamelIn_0_value)
 {
     Square sq(0);
     EXPECT_EQ(sq.getCamelInFront(), unknownCamel);
@@ -218,7 +218,7 @@ TEST(Square_getCamelIn_0_value, Negative)
     EXPECT_EQ(sq.getCamelAtBottom(), unknownCamel);
 }
 
-TEST(Square_getCamelPlacement, Negative)
+TEST(Square, getCamelPlacement)
 {
     Square sq(0);
     sq.addCamelToTop(camelOrange);
