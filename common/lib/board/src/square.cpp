@@ -92,45 +92,54 @@ int8_t Square::getLocationToAdd()
 
 uint8_t Square::getNumCamels()
 {
-	return m_camelVec.size();
+	return m_camel_vec.size();
 }
 
 void Square::addCamelToTop(camelColour_e colour)
 {
-    m_camelVec.push_back(colour);
+    m_camel_vec.push_back(colour);
 }
 
 void Square::addCamelToBottom(camelColour_e colour)
 {
-    m_camelVec.insert(m_camelVec.begin(),colour);
+    m_camel_vec.insert(m_camel_vec.begin(),colour);
 }
 
-void Square::insertCamelsAtTop(std::vector<camelColour_e> vec_to_insert)
+void Square::insertCamelsAtTop(vector<camelColour_e>::iterator begin, vector<camelColour_e>::iterator end)
 {
-	m_camelVec.insert(m_camelVec.end(), vec_to_insert.begin(), vec_to_insert.end());
+	m_camel_vec.insert(m_camel_vec.end(), begin, end);
 }
 
-void Square::insertCamelsAtBottom(std::vector<camelColour_e> vec_to_insert) 
+void Square::insertCamelsAtBottom(vector<camelColour_e>::iterator begin, vector<camelColour_e>::iterator end)
 {
-	m_camelVec.insert(m_camelVec.begin(), vec_to_insert.begin(), vec_to_insert.end());
+	m_camel_vec.insert(m_camel_vec.begin(), begin, end);
 }
 
 camelColour_e Square::getCamelInFront()
 {
-	if (m_camelVec.size() > 0)
+	if (m_camel_vec.size() > 0)
 	{
-		return m_camelVec.at(m_camelVec.size()-1);
+		return m_camel_vec.at(m_camel_vec.size()-1);
 	} 
 	else return unknownCamel;
 }
 
 camelColour_e Square::getCamelInSecond()
 {
-	if (m_camelVec.size() > 1)
+	if (m_camel_vec.size() > 1)
 	{
-		return m_camelVec.at(m_camelVec.size()-2);
+		return m_camel_vec.at(m_camel_vec.size()-2);
 	} 
 	else return unknownCamel;
+}
+
+camelColour_e Square::getCamelAtBottom()
+{
+    if (m_camel_vec.size() > 0)
+    {
+        return m_camel_vec.at(0);
+    }
+    else return unknownCamel;
 }
 
 void Square::print()
@@ -139,10 +148,10 @@ void Square::print()
     cout << "[" << setw(2) <<  (m_location * 1) << "] ";
 	if (m_impedimentPresent)
 		m_impediment.print();
-    if (m_camelVec.size())
+    if (m_camel_vec.size())
     {
-        cout << "Camels[ " << m_camelVec.size() << " ]: ";
-            copy(m_camelVec.cbegin(), m_camelVec.cend(), ostream_iterator<camelColour_e>(cout," "));
+        cout << "Camels[ " << m_camel_vec.size() << " ]: ";
+            copy(m_camel_vec.cbegin(), m_camel_vec.cend(), ostream_iterator<camelColour_e>(cout," "));
     }
     
     cout << endl;

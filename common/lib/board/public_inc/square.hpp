@@ -18,7 +18,8 @@ class Square
     uint8_t             m_location;          // Location of this Square on the board
     bool                m_impedimentPresent; // Is there an impediment present on this square?
     Impediment          m_impediment;        // What type of impediment is present here?
-    std::vector<camelColour_e> m_camelVec;   // Ordered list of players on the square.
+public:
+    std::vector<camelColour_e> m_camel_vec;   // Ordered list of players on the square.
                                              // front/begin is bottom of the pile
 
 public:
@@ -41,12 +42,13 @@ public:
     void                addCamelToBottom(camelColour_e);
     
     // Methods for moving stacks of players around.
-    void                insertCamelsAtTop(std::vector<camelColour_e> vec_to_insert);
-    void                insertCamelsAtBottom(std::vector<camelColour_e> vec_to_insert);
+    void                insertCamelsAtTop(vector<camelColour_e>::iterator begin, vector<camelColour_e>::iterator end);
+    void                insertCamelsAtBottom(vector<camelColour_e>::iterator begin, vector<camelColour_e>::iterator end);
 
 	camelColour_e		getCamelInFront();
-	camelColour_e		getCamelInSecond();
-	
+    camelColour_e		getCamelInSecond();
+    camelColour_e		getCamelAtBottom();
+    
     // will need to return list of entries from end of list
 	void				print();
 };

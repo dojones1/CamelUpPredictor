@@ -15,9 +15,11 @@ software: directories $(ALL_LIBS) $(ALL_BINS)
 
 alltests: directories $(ALL_TESTS)
 
-test: $(ALL_TESTS_RUN)
+testcov: $(ALL_TESTS_RUN) $(RUNCOV)
 
-all: directories software test $(RUNCOV)
+test: testcov
+
+all: directories software test
 
 docs: 
 	$(DOXYGEN) $(DOXYFILE)

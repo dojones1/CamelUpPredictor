@@ -48,7 +48,7 @@ TEST(Board_init, Positive) {
     {
         EXPECT_EQ(brd.m_square_vec.at(idx).getLocation(), idx);
     }
-    //brd.print();
+    brd.print();
 }
 
 TEST(Board_impediment, Positive) {
@@ -60,10 +60,10 @@ TEST(Board_impediment, Positive) {
     EXPECT_EQ(brd.countImpediments(), 2);
     brd.removeImpediment(3);
     EXPECT_EQ(brd.countImpediments(), 1);
-    brd.print();
+    //brd.print();
     brd.removeAllImpediments();
     EXPECT_EQ(brd.countImpediments(), 0);
-    brd.print();
+    //brd.print();
 }
 
 TEST(Board_hasCamelFinished_sq1, Negative) {
@@ -88,6 +88,196 @@ TEST(Board_hasCamelFinished_sq16, Positive) {
     brd.addCamel(16, camelOrange);
     //brd.print();
     EXPECT_EQ(brd.hasCamelFinished(), true);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelPlaces_0, Positive) {
+    Board brd;
+    EXPECT_EQ(brd.whichCamelIsLeading(), unknownCamel);
+    EXPECT_EQ(brd.whichCamelIsSecond(), unknownCamel);
+    EXPECT_EQ(brd.whichCamelIsLast(), unknownCamel);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelPlaces_1, Positive) {
+    Board brd;
+    
+    brd.addCamel(0, camelOrange);
+    brd.addCamel(0, camelGreen);
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+    EXPECT_EQ(brd.whichCamelIsLast(), camelOrange);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelPlaces_2, Positive) {
+    Board brd;
+    
+    brd.addCamel(0, camelOrange);
+    brd.addCamel(0, camelGreen);
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(1, camelBlue);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+    EXPECT_EQ(brd.whichCamelIsLast(), camelOrange);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelPlaces_3, Positive) {
+    Board brd;
+    
+    brd.addCamel(0, camelOrange);
+    brd.addCamel(0, camelGreen);
+    brd.addCamel(1, camelYellow);
+    brd.addCamel(1, camelBlue);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+    EXPECT_EQ(brd.whichCamelIsLast(), camelOrange);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelPlaces_4, Positive) {
+    Board brd;
+    
+    brd.addCamel(0, camelOrange);
+    brd.addCamel(1, camelGreen);
+    brd.addCamel(1, camelYellow);
+    brd.addCamel(1, camelBlue);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+    EXPECT_EQ(brd.whichCamelIsLast(), camelOrange);
+}
+
+
+TEST(Board_camelMovesNoImpediment_0, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    //brd.print();
+    
+    brd.moveCamel(camelBlue,1);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+}
+
+TEST(Board_camelMovesNoImpediment_0a, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    //brd.print();
+    
+    brd.moveCamel(camelYellow,1);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+}
+
+TEST(Board_camelMovesNoImpediment_0b, Positive) {
+    Board brd;
+    brd.addCamel(0, camelOrange);
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    //brd.print();
+    
+    brd.moveCamel(camelYellow,1);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+}
+
+TEST(Board_camelMovesSwampImpediment_1, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    brd.addImpediment(1,swamp,0);
+    //brd.print();
+    
+    brd.moveCamel(camelBlue,1);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelYellow);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelBlue);
+}
+
+TEST(Board_camelMovesSwampImpediment_2, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    brd.addCamel(1, camelOrange);
+    brd.addImpediment(2,swamp,2);
+    //brd.print();
+    
+    EXPECT_EQ(brd.moveCamel(camelBlue,2),2);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelOrange);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelBlue);
+}
+
+TEST(Board_camelMovesSwampImpediment_3, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    brd.addCamel(0, camelGreen);
+    brd.addCamel(1, camelOrange);
+    brd.addImpediment(2,swamp,4);
+    //brd.print();
+    
+    EXPECT_EQ(brd.moveCamel(camelBlue,2), 4);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelOrange);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelGreen);
+    EXPECT_EQ(brd.whichCamelIsLast(), camelYellow);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelMovesOasisImpediment_1, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    brd.addImpediment(1,oasis,0);
+    //brd.print();
+    
+    EXPECT_EQ(brd.moveCamel(camelBlue,1),0);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelMovesOasisImpediment_2, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    brd.addImpediment(1,oasis,3);
+    //brd.print();
+    
+    EXPECT_EQ(brd.moveCamel(camelBlue,1),3);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+}
+
+//! Need to identify which camel is leading or not.
+TEST(Board_camelMovesOasisImpediment_3, Positive) {
+    Board brd;
+    brd.addCamel(0, camelYellow);
+    brd.addCamel(0, camelBlue);
+    brd.addCamel(2, camelOrange);
+    brd.addImpediment(1,oasis,5);
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelOrange);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelBlue);
+    //brd.print();
+    
+    EXPECT_EQ(brd.moveCamel(camelBlue,1),5);
+    //brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelOrange);
 }
 // Step 3. Call RUN_ALL_TESTS() in main().
 //

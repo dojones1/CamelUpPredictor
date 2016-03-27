@@ -21,12 +21,14 @@ Board::Board()
 
 void Board::addImpediment(uint8_t square, impedimentType_e type, player_t owner)
 {
-    m_square_vec.at(square).addImpediment(type, owner);
+    if (square < NUM_VALID_SQUARES_ON_BOARD)
+        m_square_vec.at(square).addImpediment(type, owner);
 };
 
 void Board::removeImpediment(uint8_t square)
 {
-    m_square_vec.at(square).removeImpediment();
+    if (square < NUM_VALID_SQUARES_ON_BOARD)
+        m_square_vec.at(square).removeImpediment();
 };
 
 void Board::removeAllImpediments()
@@ -59,15 +61,71 @@ void Board::addCamel(uint8_t square, camelColour_e camel)
     m_camelSquare_map[camel] = square;
 };
 
-void Board::moveCamel(camelColour_e camel, uint8_t dice_roll)
+player_t Board::moveCamel(camelColour_e camel, uint8_t dice_roll)
 {
     uint8_t initSquare = m_camelSquare_map[camel];
     uint8_t initDestSquare = initSquare + dice_roll;
     uint8_t actDestSquare = m_square_vec.at(initDestSquare).getLocationToAdd();
     
+    vector<camelColour_e> &srcVec = m_square_vec.at(initSquare).m_camel_vec;
+    Square &dstVec = m_square_vec.at(actDestSquare);
+    
+
+    // Find list of camels to be moved
+    auto it_start_of_list = srcVec.begin();
+    
+    // Find iterator for start of list
+    for (auto it = srcVec.begin(); it != srcVec.end(); ++it)
+    {
+        // Is this the camel that we are looking for?
+        if (*it == camel)
+        {
+            it_start_of_list = it;
+            break;
+        }
+    }
+
+    // Print the list to move:
+/*
+    cout << "List to move:";
+    for (auto it = it_start_of_list; (it != srcVec.end()); ++it)
+    {
+        cout << ' ' << *it ;
+    }
+    cout << endl;
+*/    
+    vector<camelColour_e> tmpVec;
+    tmpVec.insert(tmpVec.begin(), it_start_of_list, srcVec.end());
+    
+    // Now remove the camels from the original list
+    srcVec.erase(it_start_of_list, srcVec.end());
+    
+    player_t impediment_owner = UNKNOWN_PLAYER;
+    
     // Now need the complex logic to move a camel from one square to another.
-    // @TODO
-    actDestSquare = actDestSquare+1 -1;
+    if (actDestSquare == initDestSquare)
+    {
+        // No impediment so just need to add it on top
+        dstVec.insertCamelsAtTop(tmpVec.begin(), tmpVec.end());
+    }
+    else if (actDestSquare > initDestSquare)
+    {
+        // Travelled via oasis so this camel and passengers should be added on top.
+        dstVec.insertCamelsAtTop(tmpVec.begin(), tmpVec.end());
+        impediment_owner = m_square_vec.at(initDestSquare).getImpedimentOwner();
+    }
+    else
+    {
+        // Must have gone backwards from initial destination and so, must have gone via swamp.
+        // Therefore must add the camel and passengers to the bottom of the destination.
+        dstVec.insertCamelsAtBottom(tmpVec.begin(), tmpVec.end());
+        impediment_owner = m_square_vec.at(initDestSquare).getImpedimentOwner();
+    }
+    
+    // Need to update the location of all moved camels
+    m_camelSquare_map[camel] = actDestSquare;
+    
+    return impediment_owner;
 }; // returns false if a camel has moved over the finish line
 
 bool Board::hasCamelFinished()
@@ -86,13 +144,55 @@ bool Board::hasCamelFinished()
 
 camelColour_e Board::whichCamelIsLeading()
 {
-    // @TODO
+    for (auto idx = NUM_SQUARES_ON_BOARD-1; idx >= 0; idx--)
+    {
+        if (m_square_vec.at(idx).getNumCamels())
+        {
+            return m_square_vec.at(idx).getCamelInFront();
+        }
+    }
     return unknownCamel;
 };
 
 camelColour_e Board::whichCamelIsSecond()
 {
-    // @TODO
+    bool found_first = false;
+    for (auto idx = NUM_SQUARES_ON_BOARD-1; idx >= 0; idx--)
+    {
+        if (!found_first)
+        {
+            if (m_square_vec.at(idx).getNumCamels() == 0)
+            {
+                // No camels here so do nothing
+            }
+            else if (m_square_vec.at(idx).getNumCamels() == 1)
+            {
+                // Only one camel here, so this must be the first
+                found_first = true;
+            }
+            else {
+                // More than one camel here so return the second one
+                return m_square_vec.at(idx).getCamelInSecond();
+            }
+        }
+        else if (m_square_vec.at(idx).getNumCamels())
+        {
+            // The second camel must be the camel in front on this square
+            return m_square_vec.at(idx).getCamelInFront();
+        }
+    }
+    return unknownCamel;
+};
+
+camelColour_e Board::whichCamelIsLast()
+{
+    for (auto idx = 0; idx < NUM_SQUARES_ON_BOARD; idx++)
+    {
+        if (m_square_vec.at(idx).getNumCamels())
+        {
+            return m_square_vec.at(idx).getCamelAtBottom();
+        }
+    }
     return unknownCamel;
 };
 

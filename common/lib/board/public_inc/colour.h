@@ -12,6 +12,6 @@
 enum camelColour_e {unknownCamel, camelOrange, camelYellow, camelGreen, camelBlue, camelWhite};
 
 #define UNKNOWN_PLAYER 0xFF
-typedef uint8_t player_t;
+typedef uint8_t player_t; /*! Identifies the player who placed impediments */
 
 #endif /* colour_h */

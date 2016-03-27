@@ -8,6 +8,11 @@
 
 #include "impediment.hpp"
 
+Impediment::Impediment():
+m_impedimentType(invalidType),
+m_impedimentOwner(UNKNOWN_PLAYER)
+{}
+
 impedimentType_e Impediment::getImpedimentType()
 {
     return m_impedimentType;

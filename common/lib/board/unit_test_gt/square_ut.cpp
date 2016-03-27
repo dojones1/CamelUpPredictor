@@ -133,14 +133,15 @@ TEST(Square_LocationToAdd_Swamp_0, Positive)
 
 TEST(Square_vec_insert_at_top_empty_vec, Positive)
 {
-	Square sq(0);
-	vector<camelColour_e> vec_to_insert;
+    Square sq(0);
 	
 	EXPECT_EQ(sq.getNumCamels(), 0);
+    
+    vector<camelColour_e> vec_to_insert;
 	vec_to_insert.push_back(camelBlue);
 	vec_to_insert.push_back(camelGreen);
 	
-	sq.insertCamelsAtTop(vec_to_insert);
+	sq.insertCamelsAtTop(vec_to_insert.begin(), vec_to_insert.end());
 	EXPECT_EQ(sq.getNumCamels(), 2);
 }
 
@@ -155,7 +156,7 @@ TEST(Square_vec_insert_at_bottom_empty_list, Positive)
 	vec_to_insert.push_back(camelBlue);
 	vec_to_insert.push_back(camelGreen);
 	
-	sq.insertCamelsAtBottom(vec_to_insert);
+	sq.insertCamelsAtBottom(vec_to_insert.begin(), vec_to_insert.end());
 	EXPECT_EQ(sq.getNumCamels(), 2);
 	EXPECT_EQ(sq.getCamelInFront(), camelGreen);
 	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
@@ -195,6 +196,7 @@ TEST(Square_vec_value_at, Positive)
 	
 	EXPECT_EQ(sq.getCamelInFront(), camelGreen);
 	EXPECT_EQ(sq.getCamelInSecond(), camelYellow);
+    EXPECT_EQ(sq.getCamelAtBottom(), camelOrange);
     sq.print();
 }
 
@@ -205,13 +207,27 @@ TEST(Square_getCamelIn_1_value, Negative)
 	
 	EXPECT_EQ(sq.getCamelInFront(), camelOrange);
 	EXPECT_EQ(sq.getCamelInSecond(), unknownCamel);
+    EXPECT_EQ(sq.getCamelAtBottom(), camelOrange);
 }
 
 TEST(Square_getCamelIn_0_value, Negative)
 {
-	Square sq(0);
-	EXPECT_EQ(sq.getCamelInFront(), unknownCamel);
-	EXPECT_EQ(sq.getCamelInSecond(), unknownCamel);
+    Square sq(0);
+    EXPECT_EQ(sq.getCamelInFront(), unknownCamel);
+    EXPECT_EQ(sq.getCamelInSecond(), unknownCamel);
+    EXPECT_EQ(sq.getCamelAtBottom(), unknownCamel);
+}
+
+TEST(Square_getCamelPlacement, Negative)
+{
+    Square sq(0);
+    sq.addCamelToTop(camelOrange);
+    sq.addCamelToTop(camelYellow);
+    sq.addCamelToTop(camelGreen);
+    sq.addCamelToTop(camelBlue);
+    EXPECT_EQ(sq.getCamelInFront(), camelBlue);
+    EXPECT_EQ(sq.getCamelInSecond(), camelGreen);
+    EXPECT_EQ(sq.getCamelAtBottom(), camelOrange);
 }
 
 // Step 3. Call RUN_ALL_TESTS() in main().

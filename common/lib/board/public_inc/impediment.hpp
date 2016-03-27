@@ -29,10 +29,7 @@ private:
     player_t			m_impedimentOwner;       // only valid if isPresent == true;
 
 public:
-    Impediment():
-        m_impedimentType(invalidType),
-        m_impedimentOwner(UNKNOWN_PLAYER)
-    {}
+    Impediment();
     
     //Impediment(Impediment&);
     impedimentType_e getImpedimentType();
