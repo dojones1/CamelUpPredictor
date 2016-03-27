@@ -75,7 +75,19 @@ TEST(Square_addRemoveImpediment, Positive) {
     EXPECT_EQ(sq.getImpedimentType(),	invalidType);
     EXPECT_EQ(sq.getImpedimentOwner(),  UNKNOWN_PLAYER);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
+    
+    sq.print();
 }
+
+TEST(Square_LocationToAdd_noImpediment, Positive)
+{
+    Square sq(3);
+    EXPECT_EQ(sq.getLocation(),	3);
+    EXPECT_EQ(sq.isImpedimentPresent(), false);
+    
+    EXPECT_EQ(sq.getLocationToAdd(), 3);
+}
+
 
 TEST(Square_LocationToAdd_Oasis, Positive)
 {
@@ -115,6 +127,8 @@ TEST(Square_LocationToAdd_Swamp_0, Positive)
     EXPECT_EQ(sq.getImpedimentOwner(),  4);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 0);
+    
+    sq.print();
 }
 
 TEST(Square_vec_insert_at_top_empty_vec, Positive)
@@ -147,7 +161,7 @@ TEST(Square_vec_insert_at_bottom_empty_list, Positive)
 	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
 }
 
-TEST(Square_vec_insert_at_Top_existing_vec, Positive)
+TEST(Square_vec_add_at_Top_existing_vec, Positive)
 {
 	Square sq(0);
 	sq.addCamelToTop(camelBlue);
@@ -160,6 +174,18 @@ TEST(Square_vec_insert_at_Top_existing_vec, Positive)
 	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
 }
 
+TEST(Square_vec_ad_at_Bottom_existing_vec, Positive)
+{
+    Square sq(0);
+    sq.addCamelToTop(camelBlue);
+    EXPECT_EQ(sq.getNumCamels(), 1);
+    EXPECT_EQ(sq.getCamelInFront(), camelBlue);
+    
+    sq.addCamelToBottom(camelOrange);
+    EXPECT_EQ(sq.getNumCamels(), 2);
+    EXPECT_EQ(sq.getCamelInFront(), camelBlue);
+    EXPECT_EQ(sq.getCamelInSecond(), camelOrange);
+}
 TEST(Square_vec_value_at, Positive)
 {
 	Square sq(0);
@@ -169,6 +195,7 @@ TEST(Square_vec_value_at, Positive)
 	
 	EXPECT_EQ(sq.getCamelInFront(), camelGreen);
 	EXPECT_EQ(sq.getCamelInSecond(), camelYellow);
+    sq.print();
 }
 
 TEST(Square_getCamelIn_1_value, Negative)

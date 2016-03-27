@@ -53,6 +53,7 @@ TEST(Impediment_init, Positive) {
     EXPECT_EQ(imp.getImpedimentType(),	invalidType);
     EXPECT_EQ(imp.getImpedimentOwner(),	UNKNOWN_PLAYER);  
     
+    imp.print(); // to ensure that the code is executed
 }
 
 // Step 3. Call RUN_ALL_TESTS() in main().

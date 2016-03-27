@@ -18,9 +18,16 @@ alltests: directories $(ALL_TESTS)
 test: $(ALL_TESTS_RUN)
 
 all: directories software test $(RUNCOV)
-	
+
+docs: 
+	$(DOXYGEN) $(DOXYFILE)
+
+docs_clean:
+	$(_Q) $(RMRF) $(DOXY_OUT_DIR)
+
+
 install: all
 	@echo you must be root to install
 
-clean: $(ALL_CLEANS) directories_clean
+clean: $(ALL_CLEANS) directories_clean docs_clean
 

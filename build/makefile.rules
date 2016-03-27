@@ -17,6 +17,9 @@ RMF = rm -f
 RMRF = rm -rf
 MKDIR = mkdir -p
 LCOV = /usr/local/bin/lcov
+DOXYGEN = /usr/local/bin/doxygen
+
+DOXYFILE = $(DOC_DIR)/doxyfile
 
 ###########################
 # Aggregate lists
@@ -44,6 +47,8 @@ VALGRIND_BIN += /usr/local/bin/valgrind --leak-check=yes --xml=yes
 VALGRIND_CC_FLAGS = -g -O0
 endif
 
+###########################
+
 CCACHE_BIN =
 CCACHE_FLAGS = 
 
@@ -53,6 +58,8 @@ ifeq ($(CCACHE),Y)
 CCACHE_BIN = /usr/local/bin/ccache
 CCACHE_FLAGS = -Qunused-arguments -fcolor-diagnostics
 endif
+
+###########################
 
 setcovflags:
     @ echo "COV: $(COV)"
@@ -74,6 +81,7 @@ gen_coverage_data_clean:
 	$(_Q) $(RMRF) $(BUILD_DIR)/cov_output
 	$(_Q) $(RMRF) $(BUILD_DIR)/cov_output.xml
 
+ALL_CLEANS += gen_coverage_data_clean
 
 setflags:setvalgrindflags setccacheflags setcovflags
 
@@ -103,6 +111,7 @@ directories_clean:
 	$(_Q) $(RMRF) $(OSX_UT_BUILD_DIR)
 	$(_Q) $(RMRF) $(TEST_RESULTS_DIR)
 	$(_Q) $(RMRF) $(VALGRIND_RESULTS_DIR)
+
 	
 ALL_CLEANS += directories_clean
 

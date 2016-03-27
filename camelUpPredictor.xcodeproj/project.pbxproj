@@ -73,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B72F58261CA85B18007A42CE /* doxyfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doxyfile; sourceTree = "<group>"; };
 		B74044851CA29CDC002E6302 /* llvm_gcov.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = llvm_gcov.sh; sourceTree = "<group>"; };
 		B7409AD01CA0D24900E5B15D /* board_ut.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = board_ut.cpp; sourceTree = "<group>"; };
 		B7409AD11CA0D27F00E5B15D /* board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = board.hpp; sourceTree = "<group>"; };
@@ -414,9 +415,34 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		B72F58241CA85B18007A42CE /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				B72F58251CA85B18007A42CE /* dot */,
+				B72F58261CA85B18007A42CE /* doxyfile */,
+				B72F58271CA85B18007A42CE /* mscgen */,
+			);
+			path = doc;
+			sourceTree = "<group>";
+		};
+		B72F58251CA85B18007A42CE /* dot */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = dot;
+			sourceTree = "<group>";
+		};
+		B72F58271CA85B18007A42CE /* mscgen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = mscgen;
+			sourceTree = "<group>";
+		};
 		B78BD6FC1CA0C6C5004AC68E = {
 			isa = PBXGroup;
 			children = (
+				B72F58241CA85B18007A42CE /* doc */,
 				B78BD7071CA0C72B004AC68E /* build */,
 				B78BD70A1CA0C72B004AC68E /* common */,
 				B78BD71A1CA0C72B004AC68E /* makefile */,

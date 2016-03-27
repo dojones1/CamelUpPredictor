@@ -30,8 +30,7 @@ void Impediment::removeImpediment()
     m_impedimentOwner = UNKNOWN_PLAYER;
 }
 
-void Impediment::print(string parent)
+void Impediment::print()
 {
-	cout << parent << ".m_impedimentType: " << m_impedimentType << endl;
-	cout << parent << ".m_impedimentOwner: " << m_impedimentOwner <<endl;
+    cout << "Impediment: " << m_impedimentType << " => " << (m_impedimentOwner*1) << endl;
 }

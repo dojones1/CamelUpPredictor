@@ -41,18 +41,54 @@
 
 
 
-/*
- impedimentType_e getImpedimentType();
- playerColour_e   getImpedimentOwner();
- void addImpediment(impedimentType_e type, playerColour_e owner);
- void removeImpediment();
- */
 TEST(Board_init, Positive) {
     Board brd;
     
-    
+    for (auto idx = 0; idx < NUM_SQUARES_ON_BOARD; idx++)
+    {
+        EXPECT_EQ(brd.m_square_vec.at(idx).getLocation(), idx);
+    }
+    //brd.print();
 }
 
+TEST(Board_impediment, Positive) {
+    Board brd;
+    
+    brd.addImpediment(1, oasis, 1);
+
+    brd.addImpediment( 3, swamp, 2);
+    EXPECT_EQ(brd.countImpediments(), 2);
+    brd.removeImpediment(3);
+    EXPECT_EQ(brd.countImpediments(), 1);
+    brd.print();
+    brd.removeAllImpediments();
+    EXPECT_EQ(brd.countImpediments(), 0);
+    brd.print();
+}
+
+TEST(Board_hasCamelFinished_sq1, Negative) {
+    Board brd;
+    
+    brd.addCamel(1, camelOrange);
+    //brd.print();
+    EXPECT_EQ(brd.hasCamelFinished(), false);
+}
+
+TEST(Board_hasCamelFinished_sq15, Negative) {
+    Board brd;
+    
+    brd.addCamel(15, camelOrange);
+    //brd.print();
+    EXPECT_EQ(brd.hasCamelFinished(), false);
+}
+
+TEST(Board_hasCamelFinished_sq16, Positive) {
+    Board brd;
+    
+    brd.addCamel(16, camelOrange);
+    //brd.print();
+    EXPECT_EQ(brd.hasCamelFinished(), true);
+}
 // Step 3. Call RUN_ALL_TESTS() in main().
 //
 // We do this by linking in src/gtest_main.cc file, which consists of

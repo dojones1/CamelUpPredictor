@@ -7,6 +7,7 @@
 //
 
 #include "square.hpp"
+#include <iomanip>
 using namespace std;
 
 Square::Square():
@@ -134,13 +135,15 @@ camelColour_e Square::getCamelInSecond()
 
 void Square::print()
 {
-	cout << "m_impedimentPresent: " << m_impedimentPresent << endl;
+    cout.precision(2);
+    cout << "[" << setw(2) <<  (m_location * 1) << "] ";
 	if (m_impedimentPresent)
-		m_impediment.print("Square");
-	cout << "m_camelVec: " << m_camelVec.size() << " camels" << endl;
-	if (m_camelVec.size())
-	{
-		copy(m_camelVec.cbegin(), m_camelVec.cend(), ostream_iterator<camelColour_e>(cout," "));
-		cout << endl;
-	}
+		m_impediment.print();
+    if (m_camelVec.size())
+    {
+        cout << "Camels[ " << m_camelVec.size() << " ]: ";
+            copy(m_camelVec.cbegin(), m_camelVec.cend(), ostream_iterator<camelColour_e>(cout," "));
+    }
+    
+    cout << endl;
 }

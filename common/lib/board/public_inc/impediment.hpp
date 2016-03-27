@@ -26,7 +26,7 @@ class Impediment {
 private:
 
     impedimentType_e    m_impedimentType;        // Oasis or Swamp?
-    player_t			      m_impedimentOwner;       // only valid if isPresent == true;
+    player_t			m_impedimentOwner;       // only valid if isPresent == true;
 
 public:
     Impediment():
@@ -39,6 +39,6 @@ public:
     player_t   getImpedimentOwner();
     void addImpediment(impedimentType_e type, player_t owner);
     void removeImpediment();
-    void print(string parent);
+    void print();
 };
 #endif /* impediment_hpp */

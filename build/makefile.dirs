@@ -2,6 +2,8 @@ ROOT = .
 ###########################
 # Build Object paths
 BUILD_DIR = $(ROOT)/build
+DOC_DIR = $(ROOT)/doc
+DOXY_OUT_DIR = $(BUILD_DIR)/docs
 
 ###########################
 # COMMON_DIRS

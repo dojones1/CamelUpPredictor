@@ -19,10 +19,10 @@ using namespace std;
 
 class Board
 {
-    vector<Square>  m_square_vec; // Representation of the board.
-    map<camelColour_e, uint8_t>    m_camelSquare_map; // Lookup table to map camel to its current square.
 
-private:
+    map<camelColour_e, uint8_t>    m_camelSquare_map; // Lookup table to map camel to its current square.
+public:
+    vector<Square>  m_square_vec; // Representation of the board.
     
 public:
     Board();
@@ -30,10 +30,16 @@ public:
     
     void addImpediment(uint8_t square, impedimentType_e type, player_t owner);
     void removeImpediment(uint8_t square);
+    void removeAllImpediments();
+    uint8_t countImpediments();
     void addCamel(uint8_t square, camelColour_e camel);
-    bool moveCamel(camelColour_e camel, uint8_t dice_roll); // returns false if a camel has moved over the finish line
+    void moveCamel(camelColour_e camel, uint8_t dice_roll);
+    bool hasCamelFinished();
     camelColour_e whichCamelIsLeading();
     camelColour_e whichCamelIsSecond();
+    
+    // will need to return list of entries from end of list
+    void				print();
 };
 
 

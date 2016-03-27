@@ -15,15 +15,15 @@
 
 class Square
 {
-    uint8_t             m_location;
+    uint8_t             m_location;          // Location of this Square on the board
     bool                m_impedimentPresent; // Is there an impediment present on this square?
     Impediment          m_impediment;        // What type of impediment is present here?
-    std::vector<camelColour_e> m_camelVec;  // Ordered list of players on the square.
+    std::vector<camelColour_e> m_camelVec;   // Ordered list of players on the square.
                                              // front/begin is bottom of the pile
 
 public:
     Square();                   // default constructor
-    //Square(Square&);             // copy constructor
+    //Square(Square&);          // copy constructor
     Square(uint8_t location);   // populate location with a default value.
     
     bool                isImpedimentPresent();	// Confirms if an impediment is present on this square.
