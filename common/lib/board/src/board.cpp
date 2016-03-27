@@ -204,3 +204,14 @@ void Board::print()
         m_square_vec.at(idx).print();
     }
 }
+
+// will need to return list of entries from end of list
+void Board::printMinimal()
+{
+    for (auto idx = 0; idx < NUM_SQUARES_ON_BOARD; idx++)
+    {
+        if (m_square_vec.at(idx).getNumCamels() ||
+            m_square_vec.at(idx).isImpedimentPresent())
+            m_square_vec.at(idx).print();
+    }
+}

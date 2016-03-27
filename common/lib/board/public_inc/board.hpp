@@ -74,6 +74,7 @@ public:
     
     // will need to return list of entries from end of list
     void				print();
+    void				printMinimal();
 };
 
 

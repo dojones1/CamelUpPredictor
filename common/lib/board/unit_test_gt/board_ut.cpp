@@ -272,10 +272,10 @@ TEST(Board, camelMovesOasisImpediment_3) {
     brd.addImpediment(1,oasis,5);
     EXPECT_EQ(brd.whichCamelIsLeading(), camelOrange);
     EXPECT_EQ(brd.whichCamelIsSecond(), camelBlue);
-    //brd.print();
+    brd.printMinimal();
     
     EXPECT_EQ(brd.moveCamel(camelBlue,1),5);
-    //brd.print();
+    brd.printMinimal();
     EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
     EXPECT_EQ(brd.whichCamelIsSecond(), camelOrange);
 }

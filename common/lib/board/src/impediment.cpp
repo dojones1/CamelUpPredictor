@@ -37,5 +37,5 @@ void Impediment::removeImpediment()
 
 void Impediment::print()
 {
-    cout << "Impediment: " << m_impedimentType << " => " << (m_impedimentOwner*1) << endl;
+    cout << "Impediment: " << m_impedimentType << " => " << (m_impedimentOwner*1);
 }
