@@ -65,14 +65,15 @@ TEST(Square, addRemoveImpediment) {
 	Square sq(1);
 	EXPECT_EQ(sq.getLocation(),	1);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
+    EXPECT_EQ(sq.getImpedimentType(),	imp_invalidType);
     
-    sq.addImpediment(oasis, 4);
-    EXPECT_EQ(sq.getImpedimentType(),	oasis);
+    sq.addImpediment(imp_oasis, 4);
+    EXPECT_EQ(sq.getImpedimentType(),	imp_oasis);
     EXPECT_EQ(sq.getImpedimentOwner(),  4);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
 
 	sq.removeImpediment();
-    EXPECT_EQ(sq.getImpedimentType(),	invalidType);
+    EXPECT_EQ(sq.getImpedimentType(),	imp_invalidType);
     EXPECT_EQ(sq.getImpedimentOwner(),  UNKNOWN_PLAYER);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
@@ -95,8 +96,8 @@ TEST(Square, LocationToAdd_Oasis)
 	EXPECT_EQ(sq.getLocation(),	0);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
-    sq.addImpediment(oasis, 3);
-    EXPECT_EQ(sq.getImpedimentType(),	oasis);
+    sq.addImpediment(imp_oasis, 3);
+    EXPECT_EQ(sq.getImpedimentType(),	imp_oasis);
     EXPECT_EQ(sq.getImpedimentOwner(),  3);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 1);
@@ -108,9 +109,9 @@ TEST(Square, LocationToAdd_Swamp)
 	EXPECT_EQ(sq.getLocation(),	1);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
-    sq.addImpediment(swamp, 2);
+    sq.addImpediment(imp_swamp, 2);
     //sq.print();
-    EXPECT_EQ(sq.getImpedimentType(),	swamp);
+    EXPECT_EQ(sq.getImpedimentType(),	imp_swamp);
     EXPECT_EQ(sq.getImpedimentOwner(),  2);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 0);
@@ -122,8 +123,8 @@ TEST(Square, LocationToAdd_Swamp_0)
 	EXPECT_EQ(sq.getLocation(),	0);
     EXPECT_EQ(sq.isImpedimentPresent(), false);
     
-    sq.addImpediment(swamp, 4);
-    EXPECT_EQ(sq.getImpedimentType(),	swamp);
+    sq.addImpediment(imp_swamp, 4);
+    EXPECT_EQ(sq.getImpedimentType(),	imp_swamp);
     EXPECT_EQ(sq.getImpedimentOwner(),  4);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 0);

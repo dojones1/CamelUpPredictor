@@ -16,7 +16,7 @@
 class Square
 {
     uint8_t             m_location;          // Location of this Square on the board
-    bool                m_impedimentPresent; // Is there an impediment present on this square?
+    bool                m_impediment_present; // Is there an impediment present on this square?
     Impediment          m_impediment;        // What type of impediment is present here?
 public:
     std::vector<camelColour_e> m_camel_vec;   // Ordered list of players on the square.

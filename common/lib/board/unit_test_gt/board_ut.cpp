@@ -54,9 +54,9 @@ TEST(Board, init) {
 TEST(Board, impediment) {
     Board brd;
     
-    brd.addImpediment(1, oasis, 1);
+    brd.addImpediment(1, imp_oasis, 1);
 
-    brd.addImpediment( 3, swamp, 2);
+    brd.addImpediment( 3, imp_swamp, 2);
     EXPECT_EQ(brd.countImpediments(), 2);
     brd.removeImpediment(3);
     EXPECT_EQ(brd.countImpediments(), 1);
@@ -196,7 +196,7 @@ TEST(Board, camelMovesSwampImpediment_1) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
-    brd.addImpediment(1,swamp,0);
+    brd.addImpediment(1,imp_swamp,0);
     //brd.print();
     
     brd.moveCamel(camelBlue,1);
@@ -210,7 +210,7 @@ TEST(Board, camelMovesSwampImpediment_2) {
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
     brd.addCamel(1, camelOrange);
-    brd.addImpediment(2,swamp,2);
+    brd.addImpediment(2,imp_swamp,2);
     //brd.print();
     
     EXPECT_EQ(brd.moveCamel(camelBlue,2),2);
@@ -225,7 +225,7 @@ TEST(Board, camelMovesSwampImpediment_3) {
     brd.addCamel(0, camelBlue);
     brd.addCamel(0, camelGreen);
     brd.addCamel(1, camelOrange);
-    brd.addImpediment(2,swamp,4);
+    brd.addImpediment(2,imp_swamp,4);
     //brd.print();
     
     EXPECT_EQ(brd.moveCamel(camelBlue,2), 4);
@@ -240,7 +240,7 @@ TEST(Board, camelMovesOasisImpediment_1) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
-    brd.addImpediment(1,oasis,0);
+    brd.addImpediment(1,imp_oasis,0);
     //brd.print();
     
     EXPECT_EQ(brd.moveCamel(camelBlue,1),0);
@@ -254,7 +254,7 @@ TEST(Board, camelMovesOasisImpediment_2) {
     Board brd;
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
-    brd.addImpediment(1,oasis,3);
+    brd.addImpediment(1,imp_oasis,3);
     //brd.print();
     
     EXPECT_EQ(brd.moveCamel(camelBlue,1),3);
@@ -269,7 +269,7 @@ TEST(Board, camelMovesOasisImpediment_3) {
     brd.addCamel(0, camelYellow);
     brd.addCamel(0, camelBlue);
     brd.addCamel(2, camelOrange);
-    brd.addImpediment(1,oasis,5);
+    brd.addImpediment(1,imp_oasis,5);
     EXPECT_EQ(brd.whichCamelIsLeading(), camelOrange);
     EXPECT_EQ(brd.whichCamelIsSecond(), camelBlue);
     brd.printMinimal();

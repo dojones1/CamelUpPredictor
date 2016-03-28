@@ -42,15 +42,15 @@
 TEST(Impediment, init) {
 	Impediment imp;
     
-    EXPECT_EQ(imp.getImpedimentType(),	invalidType);
+    EXPECT_EQ(imp.getImpedimentType(),	imp_invalidType);
     EXPECT_EQ(imp.getImpedimentOwner(),	UNKNOWN_PLAYER);  
     
-    imp.addImpediment(oasis,1);
-    EXPECT_EQ(imp.getImpedimentType(),	oasis);
+    imp.addImpediment(imp_oasis,1);
+    EXPECT_EQ(imp.getImpedimentType(),	imp_oasis);
     EXPECT_EQ(imp.getImpedimentOwner(),	1);  
     
     imp.removeImpediment();
-    EXPECT_EQ(imp.getImpedimentType(),	invalidType);
+    EXPECT_EQ(imp.getImpedimentType(),	imp_invalidType);
     EXPECT_EQ(imp.getImpedimentOwner(),	UNKNOWN_PLAYER);  
     
     imp.print(); // to ensure that the code is executed

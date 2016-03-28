@@ -11,22 +11,22 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "colour.h"
+#include "enum_def.h"
+#include "enum_camelColour.h"
+
+#include "enum_def.h"
+#include "enum_impedimentType.h"
 using namespace std;
 
-typedef enum impedimentType_e
-{
-    invalidType,
-    oasis,
-    swamp
-} impedimentType_e;
+#define UNKNOWN_PLAYER 0xFF
+typedef uint8_t player_t; /*! Identifies the player who placed impediments */
 
 class Impediment {
     
 private:
 
-    impedimentType_e    m_impedimentType;        // Oasis or Swamp?
-    player_t			m_impedimentOwner;       // only valid if isPresent == true;
+    impedimentType_e    m_impediment_type;        // Oasis or Swamp?
+    player_t			m_impediment_owner;       // only valid if isPresent == true;
 
 public:
     Impediment();

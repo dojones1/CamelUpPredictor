@@ -8,23 +8,25 @@
 
 #include "square.hpp"
 #include <iomanip>
+#include "enum_conv.h"
+#include "enum_camelColour.h"
 using namespace std;
 
 Square::Square():
     m_location(0),
-    m_impedimentPresent(false)
+    m_impediment_present(false)
 {
 }
 
 Square::Square(uint8_t location):
 	m_location(location),
-	m_impedimentPresent(false)
+	m_impediment_present(false)
 {
 }
 
 
 bool Square::isImpedimentPresent() {
-    return m_impedimentPresent;
+    return m_impediment_present;
 }
 
 impedimentType_e    Square::getImpedimentType()
@@ -49,18 +51,18 @@ player_t   Square::getImpedimentOwner() {
 void Square::addImpediment(impedimentType_e type, player_t owner)
 {
 	m_impediment.addImpediment(type, owner);
-	m_impedimentPresent = true;
+	m_impediment_present = true;
 }
 
 void Square::removeImpediment()
 {
 	m_impediment.removeImpediment();
-	m_impedimentPresent = false;
+	m_impediment_present = false;
 }
 
 int8_t Square::getLocationToAdd()
 {
-	if (m_impedimentPresent == false)
+	if (m_impediment_present == false)
 	{
 		// If no impediment is present then we can allow the player here
 		return m_location;
@@ -68,7 +70,7 @@ int8_t Square::getLocationToAdd()
 	else
 	{
 		// Now test the impedimentType.
-		if (m_impediment.getImpedimentType() == oasis)
+		if (m_impediment.getImpedimentType() == imp_oasis)
 		{
 			// Oasis means that the player can be moved forward
 			return m_location + 1;
@@ -146,7 +148,7 @@ void Square::print()
 {
     cout.precision(2);
     cout << "[" << setw(2) <<  (m_location * 1) << "] ";
-	if (m_impedimentPresent)
+	if (m_impediment_present)
 		m_impediment.print();
     if (m_camel_vec.size())
     {

@@ -74,13 +74,16 @@
 
 /* Begin PBXFileReference section */
 		B72F58261CA85B18007A42CE /* doxyfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doxyfile; sourceTree = "<group>"; };
+		B72F58281CA915C8007A42CE /* enum_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_def.h; sourceTree = "<group>"; };
+		B72F58291CA915E7007A42CE /* enum_conv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_conv.h; sourceTree = "<group>"; };
+		B72F582B1CA91A1B007A42CE /* enum_impedimentType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_impedimentType.h; sourceTree = "<group>"; };
 		B74044851CA29CDC002E6302 /* llvm_gcov.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = llvm_gcov.sh; sourceTree = "<group>"; };
 		B7409AD01CA0D24900E5B15D /* board_ut.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = board_ut.cpp; sourceTree = "<group>"; };
 		B7409AD11CA0D27F00E5B15D /* board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = board.hpp; sourceTree = "<group>"; };
 		B78BD7081CA0C72B004AC68E /* makefile.dirs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = makefile.dirs; sourceTree = "<group>"; };
 		B78BD7091CA0C72B004AC68E /* makefile.rules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = makefile.rules; sourceTree = "<group>"; };
 		B78BD70D1CA0C72B004AC68E /* makefile.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = makefile.inc; sourceTree = "<group>"; };
-		B78BD70F1CA0C72B004AC68E /* colour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colour.h; sourceTree = "<group>"; };
+		B78BD70F1CA0C72B004AC68E /* enum_camelColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enum_camelColour.h; sourceTree = "<group>"; };
 		B78BD7101CA0C72B004AC68E /* impediment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = impediment.hpp; sourceTree = "<group>"; };
 		B78BD7111CA0C72B004AC68E /* square.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = square.hpp; sourceTree = "<group>"; };
 		B78BD7131CA0C72B004AC68E /* impediment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = impediment.cpp; sourceTree = "<group>"; };
@@ -493,9 +496,12 @@
 			isa = PBXGroup;
 			children = (
 				B7409AD11CA0D27F00E5B15D /* board.hpp */,
-				B78BD70F1CA0C72B004AC68E /* colour.h */,
+				B78BD70F1CA0C72B004AC68E /* enum_camelColour.h */,
 				B78BD7101CA0C72B004AC68E /* impediment.hpp */,
 				B78BD7111CA0C72B004AC68E /* square.hpp */,
+				B72F58281CA915C8007A42CE /* enum_def.h */,
+				B72F58291CA915E7007A42CE /* enum_conv.h */,
+				B72F582B1CA91A1B007A42CE /* enum_impedimentType.h */,
 			);
 			path = public_inc;
 			sourceTree = "<group>";
