@@ -71,7 +71,7 @@ endif
 
 ALL_CLEANS += gen_coverage_data_clean
 
-gen_coverage_data: alltests
+gen_coverage_data: alltestsrun
 	$(LCOV) --directory $(BUILD_DIR) --base-directory . --capture -o $(BUILD_DIR)/cov.info
 	/usr/local/bin/genhtml $(BUILD_DIR)/cov.info -o $(BUILD_DIR)/cov_output
 	/usr/local/bin/gcovr build --xml-pretty > $(BUILD_DIR)/cov_output.xml
@@ -85,7 +85,9 @@ ALL_CLEANS += gen_coverage_data_clean
 
 setflags:setvalgrindflags setccacheflags setcovflags
 
-
+ifndef TESTFILTER
+TESTFILTER=*
+endif
 
 ###########################
 # Make the Directories for build artefacts
@@ -283,7 +285,7 @@ $(1)_run: $(1)
 # VALGRIND_UTX_BIN = $(VALGRIND_BIN)
 # VALGRIND_UTX_BIN += --xml-file $(VALGRIND_RESULTS_DIR)/$(2).xml
 # endif
-	$(_Q) $(VALGRIND_UTX_BIN) $$($(7)_UT_BIN_DIR)/$(2) --gtest_output=xml:$(TEST_RESULTS_DIR)/$(1).xml
+	$(_Q) $(VALGRIND_UTX_BIN) $$($(7)_UT_BIN_DIR)/$(2) --gtest_filter=$(TESTFILTER) --gtest_output=xml:$(TEST_RESULTS_DIR)/$(1).xml
 
 ALL_TESTS_RUN += $(1)_run
 

@@ -15,9 +15,9 @@ software: directories $(ALL_LIBS) $(ALL_BINS)
 
 alltests: directories $(ALL_TESTS)
 
-testcov: $(ALL_TESTS_RUN) $(RUNCOV)
+alltestsrun: $(ALL_TESTS_RUN)
 
-test: testcov
+test: alltestsrun $(RUNCOV)
 
 all: directories software test
 

@@ -90,7 +90,7 @@ void gameState::diceAlreadyRolled(camelColour_e camel, uint8_t dice_roll)
 
 player_t gameState::moveCamel(camelColour_e camel, uint8_t dice_roll)
 {
-    cout << (m_camels_still_to_roll+1-1) <<" *** Move Camel[" << camel << "] " << (dice_roll+1-1) << endl;
+    //cout << (m_camels_still_to_roll+1-1) <<" *** Move Camel[" << camel << "] " << (dice_roll+1-1) << endl;
     validate_dice_roll(dice_roll);
     
     // Is the camel already on the board?
@@ -128,7 +128,7 @@ void gameState::addResult(camelColour_e first_camel, camelColour_e second_camel,
 
 void gameState::recalculateStats()
 {
-    cout << (m_camels_still_to_roll+1-1) << " *** Recalculating Stats ***" << endl;
+    //cout << (m_camels_still_to_roll+1-1) << " *** Recalculating Stats ***" << endl;
     // Now need to regenerate all of our stats.
     // Clear our own stats
     clearStats();
@@ -146,7 +146,7 @@ void gameState::recalculateStats()
             // Loop over the dice_rolls
             for (auto dice_roll = 1; dice_roll < 4; dice_roll++)
             {
-                cout << (m_camels_still_to_roll+1-1) << " Rolling for Camel:" << camel_info.m_colour<< " " << " "<< (dice_roll+1 -1) << endl;
+                //cout << (m_camels_still_to_roll+1-1) << " Rolling for Camel:" << camel_info.m_colour<< " " << " "<< (dice_roll+1 -1) << endl;
                 // Create a new game State based upon this.
                 gameState gsNext;
                 gsNext = *this;

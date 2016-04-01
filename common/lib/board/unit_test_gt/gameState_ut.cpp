@@ -175,21 +175,23 @@ TEST(GameState, moveCamel_validCamel) {
     }
 }
 
+
+
 // Test to show that when there are no options recalculate will simply report the results from the current camel.
 TEST(GameState, moveCamel_BoardLive1Camel_move) {
     gameState gs;
     gs.addCamel(1, camelOrange);
     gs.moveCamel(camelOrange, 3);
-    gs.print();
+    //gs.print();
     gs.makeBoardLive();
     gs.printStats();
 }
 
 // Test to show that when there are no options recalculate will calculate the valid moves for this camel
-TEST(GameState, moveCamel_BoardLive1Camel_nomove) {
+TEST(GameState, DISABLED_moveCamel_BoardLive1Camel_nomove) {
     gameState gs;
     gs.addCamel(1, camelOrange);
-    gs.print();
+    //gs.print();
     gs.makeBoardLive();
     gs.printStats();
 }
@@ -245,6 +247,35 @@ TEST(GameState, moveCamel_BoardLive2Camel_overlap) {
     gs.makeBoardLive();
     gs.printStats();
     EXPECT_EQ(gs.getNumResults(),18);
+}
+
+TEST(GameState, moveCamel_BoardLive2Camel_overlap_imp) {
+    gameState gs;
+    gs.addCamel(0, camelOrange);
+    gs.addCamel(2, camelBlue);
+    gs.makeBoardLive();
+    gs.addImpediment(3, imp_swamp, 2);
+    gs.printStats();
+    EXPECT_EQ(gs.getNumResults(),18);
+}
+
+
+//void addImpediment(uint8_t square, impedimentType_e type, player_t owner); // to be used during initialisation
+//void addCamel(uint8_t square, camelColour_e camel); // to be used to add a camel during board initialisation
+//void makeBoardLive();  // to be used to force the game state to live even if insufficient camels have been added
+//void diceAlreadyRolled(camelColour_e camel, uint8_t dice_roll); // to be used if the dice has already been rolled to reach an initial state.
+//player_t moveCamel(camelColour_e camel, uint8_t dice_roll); // to be used to update the state during processing.
+
+TEST(GameState, myGame) {
+    gameState gs;
+    gs.addCamel(2, camelWhite);
+    gs.addCamel(2, camelOrange);
+    gs.addCamel(2, camelGreen);
+    gs.addCamel(3, camelBlue);
+    gs.addCamel(3, camelYellow);
+    
+    // Don't need to make board live as it should already be live
+    gs.printStats();
 }
 
 // Step 3. Call RUN_ALL_TESTS() in main().
