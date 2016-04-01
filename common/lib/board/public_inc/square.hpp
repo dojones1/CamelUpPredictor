@@ -13,6 +13,9 @@
 #include <vector>
 #include "impediment.hpp"
 
+#include "enum_def.h"
+#include "enum_camelColour.h"
+
 class Square
 {
     uint8_t             m_location;          // Location of this Square on the board

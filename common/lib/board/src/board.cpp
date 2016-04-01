@@ -22,7 +22,21 @@ Board::Board()
 void Board::addImpediment(uint8_t square, impedimentType_e type, player_t owner)
 {
     if (square < NUM_VALID_SQUARES_ON_BOARD)
+    {
+        if (((square+1) < NUM_VALID_SQUARES_ON_BOARD) &&
+            m_square_vec.at(square+1).isImpedimentPresent())
+        {
+            throw logic_error("Cannot place an impediment when there is one on the next square");
+        }
+    
+        if ((square > 0) &&
+            m_square_vec.at(square-1).isImpedimentPresent())
+        {
+            throw logic_error("Cannot place an impediment when there is one on the previous square");
+        }
+
         m_square_vec.at(square).addImpediment(type, owner);
+    }
 };
 
 void Board::removeImpediment(uint8_t square)

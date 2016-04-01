@@ -101,6 +101,7 @@ TEST(Square, LocationToAdd_Oasis)
     EXPECT_EQ(sq.getImpedimentOwner(),  3);
     EXPECT_EQ(sq.isImpedimentPresent(), true);
     EXPECT_EQ(sq.getLocationToAdd(), 1);
+    sq.print();
 }
 
 TEST(Square, LocationToAdd_Swamp)
@@ -176,7 +177,7 @@ TEST(Square, vec_add_at_Top_existing_vec)
 	EXPECT_EQ(sq.getCamelInSecond(), camelBlue);
 }
 
-TEST(Square, vec_ad_at_Bottom_existing_vec)
+TEST(Square, vec_add_at_Bottom_existing_vec)
 {
     Square sq(0);
     sq.addCamelToTop(camelBlue);

@@ -6,8 +6,9 @@
 //  Copyright © 2016 Donald Jones. All rights reserved.
 //
 
-#include "square.hpp"
+
 #include <iomanip>
+#include "square.hpp"
 #include "enum_conv.h"
 #include "enum_camelColour.h"
 using namespace std;
@@ -153,7 +154,13 @@ void Square::print()
     if (m_camel_vec.size())
     {
         cout << "Camels[ " << m_camel_vec.size() << " ]: ";
-            copy(m_camel_vec.cbegin(), m_camel_vec.cend(), ostream_iterator<camelColour_e>(cout," "));
+        #if 0
+        for (auto it = m_camel_vec.begin(); it < m_camel_vec.end(); ++it)
+        {
+            cout << *it << " ";
+        }
+        #endif
+        copy(m_camel_vec.cbegin(), m_camel_vec.cend(), ostream_iterator<camelColour_e>(cout," "));
     }
     
     cout << endl;

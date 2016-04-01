@@ -14,6 +14,6 @@
 #undef ENUM_END
 #define ENUM_START(NAME) enum NAME {
 #define ENUM_ADD(NAME, VALUE) NAME = VALUE,
-#define ENUM_END(NAME) COUNT_##NAME };
-
+#define ENUM_END(NAME) COUNT_##NAME }; \
+ostream& operator<<(ostream& os, enum NAME c);
 #endif /* enum_def_h */

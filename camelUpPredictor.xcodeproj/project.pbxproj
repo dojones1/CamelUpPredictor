@@ -77,6 +77,9 @@
 		B72F58281CA915C8007A42CE /* enum_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_def.h; sourceTree = "<group>"; };
 		B72F58291CA915E7007A42CE /* enum_conv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_conv.h; sourceTree = "<group>"; };
 		B72F582B1CA91A1B007A42CE /* enum_impedimentType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_impedimentType.h; sourceTree = "<group>"; };
+		B72F582C1CAA4BF0007A42CE /* gameState.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameState.cpp; sourceTree = "<group>"; };
+		B72F58311CAA6EC9007A42CE /* gameState_ut.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameState_ut.cpp; sourceTree = "<group>"; };
+		B72F58321CAA6FE5007A42CE /* gameState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gameState.hpp; sourceTree = "<group>"; };
 		B74044851CA29CDC002E6302 /* llvm_gcov.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = llvm_gcov.sh; sourceTree = "<group>"; };
 		B7409AD01CA0D24900E5B15D /* board_ut.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = board_ut.cpp; sourceTree = "<group>"; };
 		B7409AD11CA0D27F00E5B15D /* board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = board.hpp; sourceTree = "<group>"; };
@@ -495,6 +498,7 @@
 		B78BD70E1CA0C72B004AC68E /* public_inc */ = {
 			isa = PBXGroup;
 			children = (
+				B72F58321CAA6FE5007A42CE /* gameState.hpp */,
 				B7409AD11CA0D27F00E5B15D /* board.hpp */,
 				B78BD70F1CA0C72B004AC68E /* enum_camelColour.h */,
 				B78BD7101CA0C72B004AC68E /* impediment.hpp */,
@@ -512,6 +516,7 @@
 				B78BD7131CA0C72B004AC68E /* impediment.cpp */,
 				B78BD7141CA0C72B004AC68E /* square.cpp */,
 				B78BD8B61CA0CCAE004AC68E /* board.cpp */,
+				B72F582C1CAA4BF0007A42CE /* gameState.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 				B78BD7171CA0C72B004AC68E /* makefile.inc */,
 				B78BD7181CA0C72B004AC68E /* square_ut.cpp */,
 				B7409AD01CA0D24900E5B15D /* board_ut.cpp */,
+				B72F58311CAA6EC9007A42CE /* gameState_ut.cpp */,
 			);
 			path = unit_test_gt;
 			sourceTree = "<group>";

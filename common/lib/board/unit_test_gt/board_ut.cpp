@@ -66,6 +66,33 @@ TEST(Board, impediment) {
     //brd.print();
 }
 
+TEST(Board, impedimentInvalid) {
+    Board brd;
+    
+    brd.addImpediment(1, imp_oasis, 1);
+    try{
+        brd.addImpediment( 0, imp_swamp, 2);
+        FAIL() << "Expected std::logic_error";
+    }
+    catch (logic_error const & err) {
+        EXPECT_EQ(err.what(), std::string("Cannot place an impediment when there is one on the next square"));
+    }
+    catch(...) {
+        FAIL() << "Expected std::logic_error";
+    }
+    
+    try{
+        brd.addImpediment( 2, imp_swamp, 2);
+        FAIL() << "Expected std::logic_error";
+    }
+    catch (logic_error const & err) {
+        EXPECT_EQ(err.what(), std::string("Cannot place an impediment when there is one on the previous square"));
+    }
+    catch(...) {
+        FAIL() << "Expected std::logic_error";
+    }
+}
+
 TEST(Board, hasCamelFinished_sq1) {
     Board brd;
     
@@ -279,6 +306,26 @@ TEST(Board, camelMovesOasisImpediment_3) {
     EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
     EXPECT_EQ(brd.whichCamelIsSecond(), camelOrange);
 }
+
+//! Need to identify which camel is leading or not.
+TEST(Board, copyTest) {
+    Board brd1;
+    brd1.addCamel(0, camelYellow);
+    brd1.addCamel(0, camelBlue);
+    brd1.addCamel(2, camelOrange);
+    brd1.addImpediment(1,imp_oasis,5);
+    EXPECT_EQ(brd1.whichCamelIsLeading(), camelOrange);
+    EXPECT_EQ(brd1.whichCamelIsSecond(), camelBlue);
+    EXPECT_EQ(brd1.countImpediments(), 1);
+    brd1.printMinimal();
+    
+    Board brd2(brd1);
+    brd2.printMinimal();
+    EXPECT_EQ(brd1.whichCamelIsLeading(), brd2.whichCamelIsLeading());
+    EXPECT_EQ(brd1.whichCamelIsSecond(), brd2.whichCamelIsSecond());
+    EXPECT_EQ(brd1.countImpediments(), brd2.countImpediments());
+}
+
 // Step 3. Call RUN_ALL_TESTS() in main().
 //
 // We do this by linking in src/gtest_main.cc file, which consists of

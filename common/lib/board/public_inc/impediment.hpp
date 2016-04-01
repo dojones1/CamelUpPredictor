@@ -11,12 +11,12 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "enum_def.h"
-#include "enum_camelColour.h"
+
+using namespace std;
 
 #include "enum_def.h"
 #include "enum_impedimentType.h"
-using namespace std;
+
 
 #define UNKNOWN_PLAYER 0xFF
 typedef uint8_t player_t; /*! Identifies the player who placed impediments */
