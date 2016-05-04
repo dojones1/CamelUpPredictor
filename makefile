@@ -33,3 +33,4 @@ install: all
 
 clean: $(ALL_CLEANS) directories_clean docs_clean
 
+.DEFAULT_GOAL = all

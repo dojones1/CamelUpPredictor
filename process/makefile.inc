@@ -1,1 +1,1 @@
-# include $(CAMELUPP_DIR)/makefile.inc
+include $(CAMELUPP_DIR)/makefile.inc

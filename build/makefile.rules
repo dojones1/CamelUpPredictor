@@ -185,53 +185,54 @@ endef
 # 4 - c flags
 # 5 - list of c++ files
 # 6 - c++ flags
-# 7 - target
+# 7 - linker flags
+# 8 - target
 
 define COMMON_BIN
 
 #.c subsubsitution rule i.e. turn c files into .o files
-$$($(7)_OBJ_DIR))/%.o: $(ROOT)/%.c
+$$($(8)_OBJ_DIR))/%.o: $(ROOT)/%.c
 	@ echo "\033[0;34m [ $(7)_OBJ_C:     $$@ $<] \033[m"
 	$(_Q) $(MKDIR) `dirname $$@`
-	$(_Q) $(CCACHE_BIN) $$($(7)_CC) $$($(7)_FLAGS) -c $(4) $$< -o $$@
+	$(_Q) $(CCACHE_BIN) $$($(8)_CC) $$($(8)_FLAGS) -c $(4) $$< -o $$@
  
 #.cpp subsubsitution rule i.e. turn cpp files into .o files
-$$($(7)_OBJ_DIR)/%.o: $(ROOT)/%.cpp
-	@ echo "\033[0;34m [ $(7)_OBJ_C++: $$@] \033[m"
+$$($(8)_OBJ_DIR)/%.o: $(ROOT)/%.cpp
+	@ echo "\033[0;34m [ $(8)_OBJ_C++: $$@] \033[m"
 	$(_Q) $(MKDIR) `dirname $$@`
-	$(_Q) $(CCACHE_BIN) $$($(7)_CCPLUSPLUS) $$($(7)_FLAGS) -c $(6) $$< -o $$@ 
+	$(_Q) $(CCACHE_BIN) $$($(8)_CCPLUSPLUS) $$($(8)_FLAGS) -c $(6) $$< -o $$@
  
 # bin rule dependent on all .o which are created from the .c and .cpp files passed in
-$$($(7)_BIN_DIR)/$(2): setflags $(patsubst $(ROOT)/%.c, $$($(7)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_OBJ_DIR)/%.o,$(5))
-	@ echo "\033[0;35m [ $(7)_BIN:     $$@ $<] \033[m"
-	$(_Q) $(MKDIR) $(dir $$($(7)_BIN_DIR)/$(2))
-	$(_Q) $(CCACHE_BIN) $$($(7)_CCPLUSPLUS) $$($(7)_FLAGS) $6 $(patsubst $(ROOT)/%.c, $$($(7)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_OBJ_DIR)/%.o,$(5)) -o $$($(7)_BIN_DIR)/$2
+$$($(8)_BIN_DIR)/$(2): setflags $(patsubst $(ROOT)/%.c, $$($(8)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(8)_OBJ_DIR)/%.o,$(5))
+	@ echo "\033[0;35m [ $(8)_BIN:     $$@ $<] \033[m"
+	$(_Q) $(MKDIR) $(dir $$($(8)_BIN_DIR)/$(2))
+	$(_Q) $(CCACHE_BIN) $$($(8)_CCPLUSPLUS) $$($(8)_FLAGS) $6 $(patsubst $(ROOT)/%.c, $$($(8)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(8)_OBJ_DIR)/%.o,$(5)) $$($(8)_LIB_DIR)/$(7) -o $$($(8)_BIN_DIR)/$2
 	
 # target dependent on binary
-$(1): $$($(7)_BIN_DIR)/$(2)
-	@ echo "\033[0;35m [ $(7)_TARGET:     $$@ ] \033[m"
+$(1): $$($(8)_BIN_DIR)/$(2)
+	@ echo "\033[0;35m [ $(8)_TARGET:     $$@ ] \033[m"
 
-ALL_OBJS += $(patsubst $(ROOT)/%.c, $$($(7)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(7)_OBJ_DIR)/%.o,$(5))
-ALL_BINS += $$($(7)_BIN_DIR)/$(2)
+ALL_OBJS += $(patsubst $(ROOT)/%.c, $$($(8)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(8)_OBJ_DIR)/%.o,$(5))
+ALL_BINS += $$($(8)_BIN_DIR)/$(2)
 
 $(1)_clean:
-	$(_Q) $(RMF) $$($(7)_BIN_DIR)/$(2)
-	$(_Q) $(RMF) $$(patsubst $(ROOT)/%.c, $$($(7)_OBJ_DIR)/%.o,$(3)) $$(patsubst $(ROOT)/%.cpp, $$($(7)_OBJ_DIR)/%.o,$(5))
+	$(_Q) $(RMF) $$($(8)_BIN_DIR)/$(2)
+	$(_Q) $(RMF) $$(patsubst $(ROOT)/%.c, $$($(8)_OBJ_DIR)/%.o,$(3)) $$(patsubst $(ROOT)/%.cpp, $$($(8)_OBJ_DIR)/%.o,$(5))
 	
 ALL_CLEANS += $(1)_clean
 
 endef
 
 define OSX_BIN
-$(eval $(call COMMON_BIN,$(1),$(2),$(3),$(4),$(5),$(6),OSX))
+$(eval $(call COMMON_BIN,$(1),$(2),$(3),$(4),$(5),$(6),$(7),OSX))
 endef
  
 define X86_BIN
-$(eval $(call COMMON_BIN,$(1),$(2),$(3),$(4),$(5),$(6),X86))
+$(eval $(call COMMON_BIN,$(1),$(2),$(3),$(4),$(5),$(6),$(7),X86))
 endef
 
 define ARM_BIN
-$(eval $(call COMMON_BIN,$(1),$(2),$(3),$(4),$(5),$(6),ARM))
+$(eval $(call COMMON_BIN,$(1),$(2),$(3),$(4),$(5),$(6),$(7),ARM))
 endef
 
 ###########################

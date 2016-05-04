@@ -47,6 +47,8 @@ void gameState::addImpediment(uint8_t square, impedimentType_e type, player_t ow
 void gameState::removeAllImpediments()
 {
     m_board.removeAllImpediments();
+    if (m_board_live)
+        recalculateStats();
 }
 
 void gameState::addCamel(uint8_t square, camelColour_e camel)
@@ -174,7 +176,7 @@ void gameState::recalculateStats()
                     m_camel_info[statCamel].m_last_count += last_count;
                     
                     if (0)
-                    // if (first_count || second_count || last_count)
+                    //if (first_count || second_count || last_count)
                     {
                         cout << "Incrementing states for: ";
                         cout << setw(10) << static_cast<camelColour_e>(statCamel) << ": ";

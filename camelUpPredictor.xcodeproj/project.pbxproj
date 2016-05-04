@@ -73,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B7245A821CBE63CC00FE9C7B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B72F58261CA85B18007A42CE /* doxyfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doxyfile; sourceTree = "<group>"; };
 		B72F58281CA915C8007A42CE /* enum_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_def.h; sourceTree = "<group>"; };
 		B72F58291CA915E7007A42CE /* enum_conv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum_conv.h; sourceTree = "<group>"; };
@@ -545,6 +546,7 @@
 		B78BD71C1CA0C72B004AC68E /* camelupp */ = {
 			isa = PBXGroup;
 			children = (
+				B7245A821CBE63CC00FE9C7B /* main.cpp */,
 				B78BD71D1CA0C72B004AC68E /* makefile.inc */,
 			);
 			path = camelupp;
