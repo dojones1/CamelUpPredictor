@@ -84,6 +84,7 @@
 		B74044851CA29CDC002E6302 /* llvm_gcov.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = llvm_gcov.sh; sourceTree = "<group>"; };
 		B7409AD01CA0D24900E5B15D /* board_ut.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = board_ut.cpp; sourceTree = "<group>"; };
 		B7409AD11CA0D27F00E5B15D /* board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = board.hpp; sourceTree = "<group>"; };
+		B753FEBB1CDA1B3200EFA020 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		B78BD7081CA0C72B004AC68E /* makefile.dirs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = makefile.dirs; sourceTree = "<group>"; };
 		B78BD7091CA0C72B004AC68E /* makefile.rules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = makefile.rules; sourceTree = "<group>"; };
 		B78BD70D1CA0C72B004AC68E /* makefile.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = makefile.inc; sourceTree = "<group>"; };
@@ -449,6 +450,7 @@
 		B78BD6FC1CA0C6C5004AC68E = {
 			isa = PBXGroup;
 			children = (
+				B753FEBB1CDA1B3200EFA020 /* .travis.yml */,
 				B72F58241CA85B18007A42CE /* doc */,
 				B78BD7071CA0C72B004AC68E /* build */,
 				B78BD70A1CA0C72B004AC68E /* common */,
