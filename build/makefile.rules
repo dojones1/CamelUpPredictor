@@ -203,7 +203,7 @@ $$($(8)_OBJ_DIR)/%.o: $(ROOT)/%.cpp
 	$(_Q) $(CCACHE_BIN) $$($(8)_CCPLUSPLUS) $$($(8)_FLAGS) -c $(6) $$< -o $$@
  
 # bin rule dependent on all .o which are created from the .c and .cpp files passed in
-$$($(8)_BIN_DIR)/$(2): setflags $(patsubst $(ROOT)/%.c, $$($(8)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(8)_OBJ_DIR)/%.o,$(5))
+$$($(8)_BIN_DIR)/$(2): setflags $(patsubst $(ROOT)/%.c, $$($(8)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(8)_OBJ_DIR)/%.o,$(5)) $$($(8)_LIB_DIR)/$(7)
 	@ echo "\033[0;35m [ $(8)_BIN:     $$@ $<] \033[m"
 	$(_Q) $(MKDIR) $(dir $$($(8)_BIN_DIR)/$(2))
 	$(_Q) $(CCACHE_BIN) $$($(8)_CCPLUSPLUS) $$($(8)_FLAGS) $6 $(patsubst $(ROOT)/%.c, $$($(8)_OBJ_DIR)/%.o,$(3)) $(patsubst $(ROOT)/%.cpp, $$($(8)_OBJ_DIR)/%.o,$(5)) $$($(8)_LIB_DIR)/$(7) -o $$($(8)_BIN_DIR)/$2
