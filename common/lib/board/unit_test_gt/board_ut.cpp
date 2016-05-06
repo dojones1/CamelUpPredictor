@@ -93,10 +93,20 @@ TEST(Board, impedimentInvalid) {
     }
 }
 
-TEST(Board, hasCamelFinished_sq1) {
+TEST(Board, hasCamelFinished_sq0) {
     Board brd;
     
-    brd.addCamel(1, camelOrange);
+    brd.addCamel(0, camelOrange);
+    //brd.print();
+    EXPECT_EQ(brd.hasCamelFinished(), false);
+}
+
+
+TEST(Board, hasCamelFinished_sq14_1) {
+    Board brd;
+    
+    brd.addCamel(14, camelOrange);
+    brd.moveCamel(camelOrange,1);
     //brd.print();
     EXPECT_EQ(brd.hasCamelFinished(), false);
 }
@@ -112,7 +122,26 @@ TEST(Board, hasCamelFinished_sq15) {
 TEST(Board, hasCamelFinished_sq16) {
     Board brd;
     
-    brd.addCamel(16, camelOrange);
+    brd.addCamel(15, camelOrange);
+    brd.moveCamel(camelOrange,1);
+    //brd.print();
+    EXPECT_EQ(brd.hasCamelFinished(), true);
+}
+
+TEST(Board, hasCamelFinished_sq17) {
+    Board brd;
+    
+    brd.addCamel(15, camelOrange);
+    brd.moveCamel(camelOrange,2);
+    //brd.print();
+    EXPECT_EQ(brd.hasCamelFinished(), true);
+}
+
+TEST(Board, hasCamelFinished_sq18) {
+    Board brd;
+    
+    brd.addCamel(15, camelOrange);
+    brd.moveCamel(camelOrange,3);
     //brd.print();
     EXPECT_EQ(brd.hasCamelFinished(), true);
 }
@@ -193,6 +222,19 @@ TEST(Board, camelMovesNoImpediment_0) {
     EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
     EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
 }
+
+TEST(Board, camelMovesNoImpediment_15) {
+    Board brd;
+    brd.addCamel(15, camelYellow);
+    brd.addCamel(15, camelBlue);
+    brd.print();
+    
+    brd.moveCamel(camelBlue,3);
+    brd.print();
+    EXPECT_EQ(brd.whichCamelIsLeading(), camelBlue);
+    EXPECT_EQ(brd.whichCamelIsSecond(), camelYellow);
+}
+
 
 TEST(Board, camelMovesNoImpediment_0a) {
     Board brd;

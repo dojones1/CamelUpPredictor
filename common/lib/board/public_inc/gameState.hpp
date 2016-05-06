@@ -41,6 +41,7 @@ public:
     void makeBoardLive();  // to be used to force the game state to live even if insufficient camels have been added
     void diceAlreadyRolled(camelColour_e camel, uint8_t dice_roll); // to be used if the dice has already been rolled to reach an initial state.
     player_t moveCamel(camelColour_e camel, uint8_t dice_roll); // to be used to update the state during processing.
+    bool hasCamelFinished();
     void recalculateStats();
     void getStats(camelColour_e camel, uint16_t &first_count, uint16_t &second_count, uint16_t &last_count);
     uint16_t getNumResults();

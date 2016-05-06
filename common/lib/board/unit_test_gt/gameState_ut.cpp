@@ -188,7 +188,7 @@ TEST(GameState, moveCamel_BoardLive1Camel_move) {
 }
 
 // Test to show that when there are no options recalculate will calculate the valid moves for this camel
-TEST(GameState, DISABLED_moveCamel_BoardLive1Camel_nomove) {
+TEST(GameState, moveCamel_BoardLive1Camel_nomove) {
     gameState gs;
     gs.addCamel(1, camelOrange);
     //gs.print();
@@ -259,6 +259,46 @@ TEST(GameState, moveCamel_BoardLive2Camel_overlap_imp) {
     EXPECT_EQ(gs.getNumResults(),18);
 }
 
+TEST(GameState, moveCamel_BoardLive2Camel_endGame13) {
+    gameState gs;
+    gs.addCamel(13, camelWhite);
+    gs.addCamel(13, camelOrange);
+    gs.addCamel(13, camelGreen);
+    gs.addCamel(13, camelBlue);
+    gs.addCamel(13, camelYellow);
+    gs.printStats();
+}
+
+TEST(GameState, moveCamel_BoardLive2Camel_endGame14) {
+    gameState gs;
+    gs.addCamel(14, camelWhite);
+    gs.addCamel(14, camelOrange);
+    gs.addCamel(14, camelGreen);
+    gs.addCamel(14, camelBlue);
+    gs.addCamel(14, camelYellow);
+    gs.printStats();
+}
+
+TEST(GameState, moveCamel_BoardLive2Camel_endGame15) {
+    gameState gs;
+    gs.addCamel(15, camelWhite);
+    gs.addCamel(15, camelOrange);
+    gs.addCamel(15, camelGreen);
+    gs.addCamel(15, camelBlue);
+    gs.addCamel(15, camelYellow);
+    gs.print();
+    gs.printStats();
+}
+
+TEST(GameState, moveCamel_BoardLive2Camel_endGame0) {
+    gameState gs;
+    gs.addCamel(0, camelWhite);
+    gs.addCamel(0, camelOrange);
+    gs.addCamel(0, camelGreen);
+    gs.addCamel(0, camelBlue);
+    gs.addCamel(0, camelYellow);
+    gs.printStats();
+}
 
 //void addImpediment(uint8_t square, impedimentType_e type, player_t owner); // to be used during initialisation
 //void addCamel(uint8_t square, camelColour_e camel); // to be used to add a camel during board initialisation

@@ -79,12 +79,12 @@ player_t Board::moveCamel(camelColour_e camel, uint8_t dice_roll)
 {
     uint8_t initSquare = m_camelSquare_map[camel];
     uint8_t initDestSquare = initSquare + dice_roll;
+    
     uint8_t actDestSquare = m_square_vec.at(initDestSquare).getLocationToAdd();
     
     vector<camelColour_e> &srcVec = m_square_vec.at(initSquare).m_camel_vec;
     Square &dstVec = m_square_vec.at(actDestSquare);
     
-
     // Find list of camels to be moved
     auto it_start_of_list = srcVec.begin();
     
@@ -107,13 +107,12 @@ player_t Board::moveCamel(camelColour_e camel, uint8_t dice_roll)
         cout << ' ' << *it ;
     }
     cout << endl;
-*/    
+*/
     vector<camelColour_e> tmpVec;
     tmpVec.insert(tmpVec.begin(), it_start_of_list, srcVec.end());
     
     // Now remove the camels from the original list
     srcVec.erase(it_start_of_list, srcVec.end());
-    
     player_t impediment_owner = UNKNOWN_PLAYER;
     
     // Now need the complex logic to move a camel from one square to another.
@@ -140,20 +139,19 @@ player_t Board::moveCamel(camelColour_e camel, uint8_t dice_roll)
     m_camelSquare_map[camel] = actDestSquare;
     
     return impediment_owner;
-}; // returns false if a camel has moved over the finish line
+};
 
+// returns false if a camel has moved over the finish line
 bool Board::hasCamelFinished()
 {
-    bool camelFinished = false;
     for (auto idx = NUM_VALID_SQUARES_ON_BOARD; idx < NUM_SQUARES_ON_BOARD; idx++)
     {
         if (m_square_vec.at(idx).getNumCamels())
         {
-            camelFinished = true;
-            return camelFinished;
+            return true;
         }
     }
-    return camelFinished;
+    return false;
 }
 
 camelColour_e Board::whichCamelIsLeading()

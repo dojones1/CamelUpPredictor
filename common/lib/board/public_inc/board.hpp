@@ -14,7 +14,7 @@
 #include "square.hpp"
 using namespace std;
 
-#define NUM_SQUARES_ON_BOARD 18
+#define NUM_SQUARES_ON_BOARD 19
 #define NUM_VALID_SQUARES_ON_BOARD 16
 
 class Board
