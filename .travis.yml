@@ -4,3 +4,6 @@ compiler:
 - gcc
 
 sudo: required
+
+  
+script: make clean;make all _Q=
