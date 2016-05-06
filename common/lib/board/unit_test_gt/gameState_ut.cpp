@@ -188,7 +188,7 @@ TEST(GameState, moveCamel_BoardLive1Camel_move) {
 }
 
 // Test to show that when there are no options recalculate will calculate the valid moves for this camel
-TEST(GameState, moveCamel_BoardLive1Camel_nomove) {
+TEST(GameState, DISABLED_moveCamel_BoardLive1Camel_nomove) {
     gameState gs;
     gs.addCamel(1, camelOrange);
     //gs.print();

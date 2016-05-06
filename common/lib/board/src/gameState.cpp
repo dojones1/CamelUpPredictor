@@ -174,24 +174,27 @@ void gameState::recalculateStats()
                     // Add the stats from the completed calculation into the parent entry.
                     for (auto statCamel = 1; statCamel < COUNT_camelColour_e; statCamel++)
                     {
-                        uint16_t first_count = 0;
-                        uint16_t second_count = 0;
-                        uint16_t last_count = 0;
-                        gsNext.getStats(static_cast<camelColour_e>(statCamel), first_count, second_count, last_count);
-                    
-                        m_camel_info[statCamel].m_first_count  += first_count;
-                        m_camel_info[statCamel].m_second_count += second_count;
-                        m_camel_info[statCamel].m_last_count += last_count;
-                    
-                        if (0)
-                        //if (first_count || second_count || last_count)
+                        if (m_camel_info[statCamel].m_on_board)
                         {
-                            cout << "Incrementing states for: ";
-                            cout << setw(10) << static_cast<camelColour_e>(statCamel) << ": ";
-                            cout << setw(8) << first_count << " ";
-                            cout << setw(8) << second_count << " ";
-                            cout << setw(8) << last_count << " ";
-                            cout << endl;
+                            uint16_t first_count = 0;
+                            uint16_t second_count = 0;
+                            uint16_t last_count = 0;
+                            gsNext.getStats(static_cast<camelColour_e>(statCamel), first_count, second_count, last_count);
+                    
+                            m_camel_info[statCamel].m_first_count  += first_count;
+                            m_camel_info[statCamel].m_second_count += second_count;
+                            m_camel_info[statCamel].m_last_count += last_count;
+                    
+                            //if (first_count || second_count || last_count)
+                            if (0)
+                            {
+                                cout << "Incrementing states for: ";
+                                cout << setw(10) << static_cast<camelColour_e>(statCamel) << ": ";
+                                cout << setw(8) << first_count << " ";
+                                cout << setw(8) << second_count << " ";
+                                cout << setw(8) << last_count << " ";
+                                cout << endl;
+                            }
                         }
                     }
                 }
